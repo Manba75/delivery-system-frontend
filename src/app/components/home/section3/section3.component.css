@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container1 {
+  width: 100%;
+  padding: 50px 5%;
+  text-align: center;
+}
+
+.heading h1 {
+  color: blue;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.heading h4 {
+  font-size: 30px;
+width: 50%;
+margin: auto;
+  font-weight: 700;
+  color: #000;
+  text-transform: capitalize;
+}
+
+.conten2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.work-section1 {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.work-img img {
+  width: 100%;
+  /* max-width: 500px; */
+  height: auto;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 4fr);
+  gap: 20px;
+  /* padding-top: 40px; */
+}
+
+.work-grid1 {
+  border: 2px solid orange;
+  padding:150px 20px 30px 20px;
+  border-radius: 10px;
+  min-width: 150px;
+
+}
+
+.work-grid-content h3 {
+  font-size: 28px;
+  font-weight: 100;
+  color:black;
+
+}
+
+.work-grid-content p {
+  font-size: 20px;
+  margin-top: 5px;
+  color:black;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .conten2 {
+    gap: 20px;
+  }
+  .heading h4 {
+    font-size: 25px;
+  width: 60%;
+  margin: auto;
+
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+  .work-grid1 {
+    padding: 40px;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .conten2 {
+    flex-direction: column;
+  }
+  .heading h4 {
+    font-size: 20px;
+  width: 80%;
+  margin: auto;
+    font-weight: 700;
+    color: #000;
+    text-transform: capitalize;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .work-grid1 {
+    padding: 40px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .work-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .heading h4 {
+    font-size: 22px;
+  }
+
+  .work-grid1 {
+    padding: 40px;
+  }
+
+  .work-grid-content h3 {
+    font-size: 18px;
+  }
+
+  .work-grid-content p {
+    font-size: 12px;
+  }
+}

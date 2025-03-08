@@ -1,0 +1,319 @@
+.footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 70px;
+}
+
+.footer-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 20px;
+  padding: 20px;
+}
+.col1{
+
+  color: #000;
+}
+/* logo */
+.footer-logo-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  flex-direction: column;
+}
+.footer-logo{
+  width: 200px;
+  height: 100px;
+  margin-left: -20px;
+}
+.footer-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  border-radius: 50%;
+}
+.footer-logo-description p{
+  width: 80%;
+  font-size: 16px;
+  font-weight:100;
+  margin-top: 5px;
+
+
+}
+.footer-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #000;
+}
+
+.footer-content h3{
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+.footer-contact{
+  margin-left:-50px;
+}
+.footer-contact ul li{
+  list-style: none;
+  font-size: 16px;
+  font-weight: 100;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.footer-contact ul li i{
+  margin-right: 20px;
+  color: var(--primary-color);
+}
+
+.footer-news{
+  margin-left:-50px;
+  margin-top: -5px;
+}
+.footer-news h3{
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+
+}
+.footer-img-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  gap: 10px;
+ margin-left: -50px;
+}
+
+.footer-img {
+  width: 100%;
+  height: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom: 5px solid var(--primary-color);
+  overflow: hidden;
+}
+
+.footer-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.section{
+  background-color: var(--primary-color);
+  color: #fff;
+  width: 100%;
+  padding: 30px;
+}
+.footer-bottom{
+  background-color: var(--primary-color);
+  width: 100%;
+
+
+}
+.footer-bottom  .socail-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.footer-bottom .socail-media ul{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+}
+.footer-bottom .socail-media ul li{
+  width: 30px;
+  height: 30px;
+
+  margin:auto;
+  border-radius: 50%;
+  background-color: #fff;
+  list-style: none;
+  padding-top: 4px;
+  margin: 0 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.footer-bottom .socail-media ul li i{
+  color: var(--primary-color);
+  text-align: center;
+
+
+}
+/* Media Queries */
+@media (max-width: 1200px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-logo {
+    width: 150px;
+    height: 75px;
+  }
+
+  .footer-logo-description p {
+    font-size: 14px;
+  }
+
+  .footer-content h3 {
+    font-size: 18px;
+  }
+
+  .footer-contact ul li,
+  .footer-news h3,
+  .footer-news p {
+    font-size: 14px;
+  }
+
+  .footer-img-grid {
+    grid-template-columns: repeat(2, 100px);
+  }
+
+  .footer-img {
+    height: 75px;
+  }
+  .footer-news h3{
+    margin-left: 0px;
+  }
+  .footer-news{
+    margin-left:0px;
+    margin-top: -5px;
+  }
+  .footer-img-grid {
+
+    margin-left: 0px;
+  }
+
+}
+
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin: auto;
+  }
+
+  .footer-logo {
+    width: 100%;
+    height: 100px;
+  }
+
+  .footer-logo-description p {
+    font-size: 12px;
+  }
+
+  .footer-content h3 {
+    font-size: 16px;
+  }
+
+  .footer-contact ul li,
+  .footer-news h3,
+  .footer-news p {
+    font-size: 12px;
+  }
+
+  .footer-img-grid {
+    grid-template-columns: repeat(2, 100px);
+    margin-left: 10px;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    /* width: 100%; */
+    /* margin: 40px auto; */
+  }
+  .footer {
+    padding: 30px;
+  }
+
+  .footer-logo {
+    width: 200px;
+    height: 100px;
+    margin-left: -30px;
+  }
+
+  .footer-logo-description p {
+    font-size: 10px;
+  }
+  .footer-img-grid{
+    margin-left: 0px;
+  }
+  .footer-content h3 {
+    font-size: 18px;
+  }
+
+  .footer-contact ul li,
+  .footer-news h3,
+  .footer-news p {
+    font-size: 16px;
+  }
+
+  .footer-img-grid {
+    grid-template-columns: repeat(2, 150px);
+  }
+
+  .footer-img {
+    /* height: 50px; */
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    padding: 30px;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+    /* width: 100%; */
+    /* margin: 40px auto; */
+  }
+
+  .footer-logo {
+    width: 200px;
+    height: 100px;
+    /* margin-left: -10px; */
+  }
+
+  .footer-logo-description p {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .footer-content h3 {
+    font-size: 18px;
+  }
+
+  .footer-contact ul li,
+  .footer-news p {
+    font-size:  16px;
+  }
+  .footer-news h3{
+    font-size: 18px;
+    margin-left: 0px;
+
+  }
+
+  .footer-img-grid {
+    grid-template-columns: repeat(2, 150px);
+    margin-left: 0px;
+  }
+
+  .footer-img {
+    height: 100px;
+  }
+  .footer-bottom .socail-media ul li{
+    width: 30px;
+    height: 30px;
+  }
+}

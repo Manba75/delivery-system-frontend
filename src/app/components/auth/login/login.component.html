@@ -1,0 +1,60 @@
+<div class="login">
+  <div class="row">
+   <div class="left">
+    <div class="login-image-container">
+      <img src="../../../assets/img/loginbg.png" alt="login" class="login-image">
+    </div>
+   </div>
+   <div class="right">
+    <div class="logo-container">
+     <div class="logo">
+      <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
+     </div>
+    </div>
+    <div class="login-container">
+      <div class="login-header">
+        <div class="login-icon">
+          <i class="fas fa-arrow-right-long"></i>
+        </div>
+        <h2>{{ userType === 'customer' ? 'Customer' : 'Delivery Partner' }} Login </h2>
+      </div>
+      <div class="login-body">
+        <form>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <div class="center">
+              <div class="text-right">
+                <a [routerLink]="['/forgot-password', userType]" class="forgot-password">
+                  Forgot Password?
+                </a>
+            </div>
+            </div>
+          </div>
+          <button type="submit" class="btn login-btn">Login</button>
+        </form>
+        <div class="login-footer">
+          <p class="text-center">Don't have an account?
+            <a [routerLink]="userType === 'customer' ? '/customer/signup' : '/deliverypartners/signup'" class="register-link">
+              Signup
+            </a>
+          <p>&</p>
+          <p class="text-center">
+            Want to login as a
+            <a  (click)="switchLoginType()" [routerLink]="['/login', userType === 'customer' ? 'delivery-partner' : 'customer']">
+              {{ userType === 'customer' ? 'Delivery Partner' : 'Customer' }}?
+            </a>
+          </p>
+        </div>
+      </div>
+   </div>
+   </div>
+</div>
+</div>
+

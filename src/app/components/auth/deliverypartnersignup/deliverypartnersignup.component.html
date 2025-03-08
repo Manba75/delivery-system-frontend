@@ -1,0 +1,72 @@
+<div class="login">
+  <div class="row">
+   <div class="left">
+    <div class="login-image-container">
+      <img src="../../../assets/img/dpartnersignup.png" alt="login" class="login-image">
+    </div>
+   </div>
+   <div class="right">
+    <div class="logo-container">
+     <div class="logo">
+      <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
+     </div>
+    </div>
+    <div class="login-container">
+      <div class="login-header">
+        <div class="login-icon">
+          <i class="fas fa-arrow-right-long"></i>
+        </div>
+        <h2>Delivery partner Signup</h2>
+      </div>
+      <div class="login-body">
+        <form>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="password">Licence Number</label>
+            <input type="text" formControlName="licence" class="form-control" id="licence" placeholder="Licence Number">
+          </div>
+          <div class="form-group">
+            <label for="vehiclename">Vehicle Name</label>
+            <input type="text" formControlName="vehiclename" class="form-control" id="vehiclename" placeholder="vehicle Name">
+          </div>
+          <div class="form-group">
+            <label for="vehiclenumber">Vehicle Number</label>
+            <input type="text" formControlName="vehiclenumber" class="form-control" id="vehiclenumber" placeholder="Vehicle Number">
+          </div>
+          <div class="form-group">
+            <select formControlName="vehicleType" class="dropdown" id="vehicleType">
+              <option value="" disabled selected>Select vehicleType</option>
+              <option value="Two Wheeler">Two Wheeler</option>
+              <option value="Three Wheeler">Three Wheeler</option>
+              <option value="Four Wheeler">Four Wheeler</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select formControlName="city" class="dropdown" id="city" >
+              <option value="" disabled selected>Select City</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Surat">Surat</option>
+              <option value="Rajkot">Rajkot</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn login-btn">Signup</button>
+        </form>
+        <div class="login-footer">
+          <p class="text-center">Already have an account? <a routerLink= "/login/deliverypartner"
+            class="register-link">Login</a></p>
+        </div>
+      </div>
+   </div>
+   </div>
+</div>
+</div>
+
+

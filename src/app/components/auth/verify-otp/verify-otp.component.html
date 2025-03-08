@@ -1,0 +1,38 @@
+<div class="login">
+    <div class="row">
+     <div class="left">
+      <div class="login-image-container">
+        <img src="../../../assets/img/forgotpassword.png" alt="login" class="login-image">
+      </div>
+     </div>
+     <div class="right">
+      <div class="logo-container">
+       <div class="logo">
+        <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
+       </div>
+      </div>
+      <div class="login-container">
+        <div class="login-header">
+          <div class="login-icon">
+            <i class="fa-regular fa-envelope fa-2xl" style="color: #000"></i>
+          </div>
+          <h2> Check Your Mail !</h2>
+        </div>
+        <div class="login-body">
+          <form>
+            <div class="form-group">
+              <label for="OTP">OTP</label>
+              <input type="OTP" formControlName="OTP" class="form-control" id="OTP"
+               placeholder="Enter OTP">
+            </div>
+            <a [routerLink]="userType === 'customer' ? '/login/customer' : '/login/deliverypartner'" class="register-link">
+            <button type="submit" class="btn login-btn">Login Now</button></a>
+          </form>
+
+        </div>
+     </div>
+     </div>
+  </div>
+  </div>
+
+

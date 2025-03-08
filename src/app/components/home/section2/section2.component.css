@@ -1,0 +1,151 @@
+.section2 {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* padding: 10px 0; */
+}
+
+.section2-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  padding:70px;
+
+}
+
+.section2 .left-section,
+.section2 .right-section {
+  flex: 1;
+  /* min-width: 400px; */
+  padding: 20px;
+}
+
+.left-section  .left-section-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: #000;
+}
+
+.right-section-content {
+  padding: 0 20px;
+}
+
+.right-section-content-title h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.right-section-content-description h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-top: 5px;
+  color: #000;
+}
+
+.right-section-content-description p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 5px;
+  color: #000;
+}
+
+.right-section-content-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  
+}
+
+.right-section-card1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 35px 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.right-section-card1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+  .section2-center {
+    padding: 10px;
+  }
+  .right-section-card1 {
+    padding: 20px 10px;
+  }
+}
+@media (max-width: 992px) {
+  .section2-center {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .section2 .left-section,
+  .section2 .right-section {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 30px;
+  }
+  .right-section-content-card{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section2 .left-section,
+  .section2 .right-section {
+    width: 100%;
+    padding: 10px 0;
+  }
+  .right-section-content-title h1 {
+    font-size: 1.8rem;
+  }
+  .right-section-content-description h2 {
+    font-size: 2rem;
+  }
+  .left-section-content{
+    width: 100%;
+    /* padding: 10px; */
+
+  }
+}
+
+@media (max-width: 576px) {
+  .section2-center {
+    padding: 10px;
+  }
+  .right-section-content {
+    padding: 0 10px;
+  }
+
+  .right-section-content-card{
+    width: 90%;
+    padding: 10px;
+  }
+  .left-section-content img {
+    width: 100%;
+    margin: auto;
+
+  }
+}
