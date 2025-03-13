@@ -1,0 +1,155 @@
+<div class="main-hero">
+
+
+
+  <div class="content">
+    <div class="header">
+      <div class="sort-order">
+        <label for="sort">Filter </label>
+       <div class="dropdown">
+        <select id="sort">
+          <option value="Today" default >Today</option>
+          <option value="Today">Last week</option>
+          <option value="Today">Last week</option>
+        </select>
+       </div>
+       </div>
+       <div class="profile-header-action">
+
+        <button class="notification">
+          <i class="fa fa-bell "></i>
+         </button>
+         <div class="main-profile">
+          <!-- Profile Button -->
+          <button class="profile" (click)="toggleDropdown()">
+            <i class="fa fa-user"></i>
+            <span class="username">John Smith</span>
+            <i class="fa fa-chevron-down dropdown-icon"></i>
+          </button>
+
+          <!-- Dropdown Content -->
+          <div class="user-info" *ngIf="isDropdownOpen">
+
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+
+
+     </div>
+    </div>
+    <div class="dashboard">
+
+
+      <h2>Dashboard</h2>
+
+      <div class="stats">
+        <div class="stat">
+         <div class="content-stat">
+          <p>125</p>
+          <span>New order</span>
+         </div>
+          <div class="icon">
+            <div class="img">
+              <img src="../../../../assets/img/new_order.png" alt="img" />
+            </div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="content-stat">
+           <p>22</p>
+           <span>Process</span>
+          </div>
+           <div class="icon">
+             <div class="img">
+               <img src="../../../../assets/img/process.png" alt="img" />
+             </div>
+           </div>
+         </div>
+         <div class="stat">
+          <div class="content-stat">
+           <p>225</p>
+           <span>Delivery</span>
+          </div>
+           <div class="icon">
+             <div class="img">
+               <img src="../../../../assets/img/delivery.png" alt="img" />
+             </div>
+           </div>
+         </div>
+         <div class="stat">
+          <div class="content-stat">
+           <p>15</p>
+           <span>Arrived</span>
+          </div>
+           <div class="icon">
+             <div class="img">
+               <img src="../../../../assets/img/arrived.png" alt="img" />
+             </div>
+           </div>
+         </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Order Request</th>
+              <th>Order Date</th>
+              <th>Customer Name</th>
+              <th>Pickup Address</th>
+              <th>Drop Address</th>
+              <th>Status</th>
+              <th>Order Charge</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>{{ order.request }}</td>
+              <td>{{ order.orderDate }}</td>
+              <td>{{ order.customer }}</td>
+              <td>{{ order.pickupaddress }}</td>
+              <td>{{ order.dropaddress }}</td>
+
+              <td>
+                <span  class="status" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span>
+              </td>
+              <td>{{ order.totalCharge }}</td>
+             <td>
+              <button class="edit-btn" (click)="openEditModal(order)">
+                <i class="fa fa-edit 2xl" style="color: var(--secondary-color);">
+
+                </i>
+             </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal" [ngClass]="{'show': isModalOpen}" *ngIf="isModalOpen">
+      <div class="modal-content">
+        <h3>Edit Order Status</h3>
+
+        <form [formGroup]="statusForm">
+          <label for="status">Order Status:</label>
+          <select id="status" formControlName="status">
+            <option value="Pending">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="In-Progress">In-Progress</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </form>
+
+        <div class="modal-actions">
+          <button class="btn" (click)="updateOrderStatus()">Save</button>
+          <button class="btn cancel" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+

@@ -45,7 +45,6 @@ margin: auto;
 
 .work-img img {
   width: 100%;
-  /* max-width: 500px; */
   height: auto;
 }
 
@@ -53,7 +52,6 @@ margin: auto;
   display: grid;
   grid-template-columns: repeat(2, 4fr);
   gap: 20px;
-  /* padding-top: 40px; */
 }
 
 .work-grid1 {
@@ -61,14 +59,12 @@ margin: auto;
   padding:150px 20px 30px 20px;
   border-radius: 10px;
   min-width: 150px;
-
 }
 
 .work-grid-content h3 {
   font-size: 28px;
   font-weight: 100;
   color:black;
-
 }
 
 .work-grid-content p {
@@ -88,7 +84,6 @@ margin: auto;
   margin: auto;
 
   }
-
   .work-grid {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
@@ -104,8 +99,8 @@ margin: auto;
   }
   .heading h4 {
     font-size: 20px;
-  width: 80%;
-  margin: auto;
+    width: 80%;
+    margin: auto;
     font-weight: 700;
     color: #000;
     text-transform: capitalize;
@@ -139,4 +134,9 @@ margin: auto;
   .work-grid-content p {
     font-size: 12px;
   }
+}
+
+.work-grid-content p{
+    text-transform:uppercase;
+    font-weight:500;
 }

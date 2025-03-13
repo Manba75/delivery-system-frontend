@@ -3,7 +3,7 @@
    align-content: center;
     width: 50%;
     margin: 0 auto;
-    z-index: 1000;
+    z-index: 1;
     top: -50PX;
     bottom: 40px;
 }
@@ -70,7 +70,10 @@
   }
 
   .text {
-    font-size: 1rem;
+    font-size: 24px;
+  }
+  .text-dpartner{
+    font-size: 24px;
   }
 }
 @media (max-width: 768px) {
@@ -84,7 +87,10 @@
   }
 
   .text {
-    font-size: 1.1rem;
+    font-size: 20px;
+  }
+  .text-dpartner{
+    font-size: 20px;
   }
 }
 @media (max-width: 992px) {
@@ -101,9 +107,7 @@
     padding: 15px;
   }
 
-  .text {
-    font-size: 1.2rem;
-  }
+
 }
 
 @media (max-width: 1200px) {
@@ -116,7 +120,5 @@
     padding: 20px;
   }
 
-  .text {
-    font-size: 1.3rem;
-  }
+
 }

@@ -1,0 +1,141 @@
+.address-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+}
+.address-section-bg {
+  position: relative;
+  background: url('../../../../assets/img/hero-bg.png') no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0px 0px 100px 0px;
+  top: 0;
+  overflow: hidden;
+}
+
+.address-section-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 51, 189, 0.5);
+  z-index: -1;
+}
+.address-section-header{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  padding: 120px 0px 20px 0px;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  max-width: 900px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  background: #dedddd;;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2);
+}
+.address{
+  display: flex;
+  justify-content:flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+}
+.tracking-map{
+ width: 50%;
+  background: url('../../../../assets/img/abd.png') no-repeat center center;
+  background-size: cover;
+  min-height: 550px;
+  border-radius: 5px;
+}
+.live-tracking-content{
+  width: 50%;
+}
+.live-tracking-header{
+ margin: 15px;
+ text-align: center;
+}
+.live-tracking-header h1{
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.address-body{
+   background-color: white;
+   box-shadow: rgba(246, 238, 238, 0.9);
+   padding: 20px;
+   border-radius: 20px;
+   margin: 20px;
+}
+.pickup-address-header{
+  margin-bottom: 15px;
+}
+.address-body h3{
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+.address-body h4{
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+.address-body h5{
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+.address-body p{
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+@media (max-width: 768px){
+  .address-section-bg{
+    padding:15px;
+  }
+  .container{
+    flex-direction: column;
+  }
+  .address{
+    flex-direction: column;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .address {
+    flex-direction: column-reverse;
+     align-items: flex-start;
+     justify-content: center;
+     width:100%;
+  }
+
+  .tracking-map {
+    width: 100%;
+    min-height: 300px;
+    padding: 10px;
+  }
+
+
+}
+

@@ -1,0 +1,55 @@
+<div class="main-hero">
+  <div class="content">
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="profile-header-main">
+          <div class="profile-header-title">
+            <h3>Welcome Manba</h3>
+         </div>
+         <div class="profile-header-action">
+            <div class="search">
+              <i class="fa fa-search fa-2xl"></i><input type="text" placeholder="Search" >
+
+            </div>
+            <button class="notification">
+              <i class="fa fa-bell "></i>
+             </button>
+             <button class="profile">
+              <i class="fa fa-user"></i>
+             </button>
+         </div>
+        </div>
+     </div>
+    </div>
+    <div class="table-container">
+      <h2>My Orders</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Order date</th>
+            <th>Delivery partner name</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Total charge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.customer }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.partner }}</td>
+            <td>{{ order.address }}</td>
+            <td>
+              <span class="status" [ngClass]="getStatusClass(order.status)">
+                {{ order.status }}
+              </span>
+            </td>
+            <td>₹ {{ order.totalCharge | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

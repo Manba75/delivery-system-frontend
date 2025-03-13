@@ -31,7 +31,7 @@
           <div class="form-group">
             <div class="center">
               <div class="text-right">
-                <a [routerLink]="['/forgot-password', userType]" class="forgot-password">
+                <a [routerLink]="['/forgot-password', userType]" class="forgot-password link">
                   Forgot Password?
                 </a>
             </div>
@@ -41,16 +41,10 @@
         </form>
         <div class="login-footer">
           <p class="text-center">Don't have an account?
-            <a [routerLink]="userType === 'customer' ? '/customer/signup' : '/deliverypartners/signup'" class="register-link">
+            <a [routerLink]="userType === 'customer' ? '/customer/signup' : '/deliverypartners/signup'" class="link">
               Signup
             </a>
-          <p>&</p>
-          <p class="text-center">
-            Want to login as a
-            <a  (click)="switchLoginType()" [routerLink]="['/login', userType === 'customer' ? 'delivery-partner' : 'customer']">
-              {{ userType === 'customer' ? 'Delivery Partner' : 'Customer' }}?
-            </a>
-          </p>
+
         </div>
       </div>
    </div>

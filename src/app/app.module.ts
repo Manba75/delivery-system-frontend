@@ -18,8 +18,6 @@ import { LoginpageComponent } from './pages/loginpage/loginpage.component';
 import { CustomerSignupComponent } from './pages/customer/customer-signup/customer-signup.component';
 import { DpartnerSignupComponent } from './pages/deliverypartners/dpartner-signup/dpartner-signup.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-
-
 import { DeliverypartnersignupComponent } from './components/auth/deliverypartnersignup/deliverypartnersignup.component';
 import { ForgotpasswordComponent } from './components/auth/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './components/auth/resetpassword/resetpassword.component';
@@ -33,6 +31,30 @@ import { ContactComponent } from './components/contact/contact/contact.component
 import { AboutpageComponent } from './pages/aboutpage/aboutpage.component';
 import { ContactpageComponent } from './pages/contactpage/contactpage.component';
 import { ContactsectionComponent } from './components/contact/contactsection/contactsection.component';
+import { CustomerprofileComponent } from './components/customers/profile/customerprofile/customerprofile.component';
+import { CustomerdashboardComponent } from './components/customers/dashboard/customerdashboard/customerdashboard.component';
+import { CustomerprofilepageComponent } from './pages/customer/customerprofilepage/customerprofilepage.component';
+import { CustomerdashboardpageComponent } from './pages/customer/customerdashboardpage/customerdashboardpage.component';
+import { DpartnerdashboardpageComponent } from './pages/deliverypartners/dpartnerdashboardpage/dpartnerdashboardpage.component';
+import { DpartnerprofilepageComponent } from './pages/deliverypartners/dpartnerprofilepage/dpartnerprofilepage.component';
+import { DpartnerprofileComponent } from './components/deliverypartners/profile/dpartnerprofile/dpartnerprofile.component';
+import { DpartnerdashboardComponent } from './components/deliverypartners/dashboard/dpartnerdashboard/dpartnerdashboard.component';
+import { SelectCityComponent } from './components/order/select-city/select-city.component';
+import { SelectVehicletypeComponent } from './components/order/select-vehicletype/select-vehicletype.component';
+import { SelectAddressComponent } from './components/order/select-address/select-address.component';
+import { LiveTrackingComponent } from './components/order/live-tracking/live-tracking.component';
+import { SelectCitypageComponent } from './pages/order/select-citypage/select-citypage.component';
+import { SelectVehicletypepageComponent } from './pages/order/select-vehicletypepage/select-vehicletypepage.component';
+import { SelectAddresspageComponent } from './pages/order/select-addresspage/select-addresspage.component';
+import { LiveTrackingpageComponent } from './pages/order/live-trackingpage/live-trackingpage.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { ConfirmOrderPageComponent } from './pages/confirm-order-page/confirm-order-page.component';
+import { VerifyEmailPageComponent } from './pages/verify-email-page/verify-email-page.component';
+import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { VerifyemailComponent } from './components/verifyemail/verifyemail.component';
+import { OrderHistroryComponent } from './components/order/order-histrory/order-histrory.component';
+import { OrderhistroryComponent } from './pages/orderhistrory/orderhistrory.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -65,12 +87,36 @@ import { ContactsectionComponent } from './components/contact/contactsection/con
     AboutpageComponent,
     ContactpageComponent,
     ContactsectionComponent,
+    CustomerprofileComponent,
+    CustomerdashboardComponent,
+    CustomerprofilepageComponent,
+    CustomerdashboardpageComponent,
+    DpartnerdashboardpageComponent,
+    DpartnerprofilepageComponent,
+    DpartnerprofileComponent,
+    DpartnerdashboardComponent,
+    SelectCityComponent,
+    SelectVehicletypeComponent,
+    SelectAddressComponent,
+    LiveTrackingComponent,
+    SelectCitypageComponent,
+    SelectVehicletypepageComponent,
+    SelectAddresspageComponent,
+    LiveTrackingpageComponent,
+    ErrorPageComponent,
+    ConfirmOrderPageComponent,
+    VerifyEmailPageComponent,
+    PaymentPageComponent,
+    VerifyemailComponent,
+    OrderHistroryComponent,
+    OrderhistroryComponent
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    
+    AppRoutingModule,
+   ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

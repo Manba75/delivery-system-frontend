@@ -1,0 +1,193 @@
+.vehicletype-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  /* bottom: 0; */
+  text-align: center;
+  overflow: hidden;
+ /* padding-bottom: 150px; */
+}
+.vehicletype-section-bg {
+  position: relative;
+  background: url('../../../../assets/img/city-bg.png') no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0px 0px 100px 0px;
+  top: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.vehicletype-section-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 51, 189, 0.5);
+  z-index: -1;
+}
+
+
+.vehicletype-section-header{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  padding: 120px 0px 20px 0px;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+
+}
+
+.container {
+  height:100%;
+  display: flex;
+  max-width: 900px;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  background-color:white;
+  padding:50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+}
+
+.dropdown select {
+  width: 100%;
+  padding: 12px 40px 12px 20px;
+  font-size: 16px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.dropdown::after {
+  content: '▼';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #007bff;
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dropdown select:hover {
+  border-color: #0056b3;
+  background-color: #f8f9fa;
+}
+
+.dropdown select:active + .dropdown::after,
+.dropdown select:focus + .dropdown::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+
+.transport-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+  place-items: center;
+  padding: 20px;
+}
+
+.option {
+  width: 120px;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.option p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.estimate-btn {
+  width: 100%;
+  height: 130px;
+  background-color: blue;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top:-20px;
+}
+@media (max-width: 768px) {
+  .container{
+    margin: 20px;
+  }
+  .transport-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .option {
+    margin: 10px auto;
+  }
+  .option p {
+    font-size: 14px;
+    text-align: center;
+  }
+  .estimate-btn{
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container{
+    margin: 10px;
+  }
+  .transport-options {
+    grid-template-columns: repeat(2, 1fr);
+    padding:5px;
+    gap:10px;
+    place-items: center;
+  }
+  .estimate-btn{
+    margin-top:0px;
+  }
+  .dropdown select {
+    width: 100%;
+    margin-left: -20px;
+  }
+  h1{
+    font-size:1.6rem;
+  }
+}

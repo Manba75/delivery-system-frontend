@@ -1,0 +1,48 @@
+
+<div class="vehicletype-section">
+  <div class="vehicletype-section-bg">
+    <app-header></app-header>
+
+    <div class="vehicletype-section-header">
+      <h1>Choose Your Vehicle </h1>
+      </div>
+      <div class="container">
+        <div class="dropdown">
+        <select id="city" onchange="openCityPage()">
+         <option selected disabled>Select a city</option>
+                <option value="city-selection.html">Ahmedabad</option>
+                <option value="city-selection.html">Bangalore</option>
+                <option value="city-selection.html">Hyderabad</option>
+                <option value="city-selection.html">Jaipur</option>
+                <option value="city-selection.html">Mumbai</option>
+                <option value="city-selection.html">Vadodara</option>
+                <option value="city-selection.html">Kolkata</option>
+                <option value="city-selection.html">Rajkot</option>
+            </select>
+        </div>
+
+        <div class="transport-options">
+            <div class="option" onclick="selectTransport('Two Wheelers')">
+                <img src="../../../../assets/img/truck.png" alt="Two Wheelers">
+                <p>Two Wheelers</p>
+            </div>
+            <div class="option" onclick="selectTransport('Trucks')">
+                <img src="../../../../assets/img/bike.png" alt="Trucks">
+                <p>Trucks</p>
+            </div>
+            <div class="option" onclick="selectTransport('Trucks')">
+              <img src="../../../../assets/img/truck.png" alt="Trucks">
+              <p>Trucks</p>
+          </div>
+          <div class="option" onclick="selectTransport('Trucks')">
+            <img src="../../../../assets/img/bike.png" alt="Trucks">
+            <p>Trucks</p>
+        </div>
+
+          <button class="estimate-btn">Get an estimate →</button>
+
+        </div>
+      </div>
+  </div>
+</div>
+

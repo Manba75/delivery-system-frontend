@@ -8,13 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ResetpasswordComponent implements OnInit {
 
-  userType: string = ''; 
+  userType: string = 'customer';
   // token: string = '';
   // newPassword: string = '';
   // confirmPassword: string = '';
-  // apiUrl = 'https://yourapi.com'; 
+  // apiUrl = 'https://yourapi.com';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
+  constructor(private route: ActivatedRoute,  private router: Router) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {

@@ -1,29 +1,62 @@
-<header class="header">
-  <div class="header-container">
-    <div class="logo">
-      <img src="../../../../assets/img/logo.png" alt="logo">
-    </div>
 
-    <!-- Burger Menu Icon -->
-    <nav class="navbar" [class.active]="menuActive">
-      <div class="burger-menu" (click)="toggleMenu()" [class.active]="menuActive">
-        <span></span>
-        <span></span>
-        <span></span>
+  <header class="header" >
+    <div class="header-container">
+      <div class="logo">
+        <img src="../../../../assets/img/logo.png" alt="logo">
       </div>
-      <div class="nav">
-        <ul>
-          <li><a routerLink="">Home</a></li>
-          <li><a routerLink="/about">About</a></li>
-          <li><a routerLink="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="navbar2">
-        <ul>
-          <li><a [routerLink]="['/login', userType]">Login</a></li>
-          <li><a routerLink="customer/signup" ><button class="btn">Book a delivery</button></a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-</header>
+      <nav class="navbar">
+
+        <div class="menu">
+          <button class="burger-menu" (click)="toggleMenu()" aria-label="Toggle navigation">
+            ☰
+          </button>
+          <div class="nav" >
+            <div class="">
+              <div class="sidebar-overlay" [class.active]="menuActive" (click)="toggleMenu()"></div>
+              <div class="sidebar" [class.active]="menuActive">
+                <button class="close-btn" (click)="toggleMenu()">✖</button>
+                <nav class="sidebar-nav">
+                  <ul>
+                    <li><a routerLink="" (click)="toggleMenu()">
+                      Home</a></li>
+                    <li><a routerLink="/about" (click)="toggleMenu()">About Us</a></li>
+                    <li><a routerLink="/contact" (click)="toggleMenu()">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- <div class="burger-menu" (click)="toggleMenu()" [class.active]="menuActive">
+              <span>Home</span>
+              <span>About Us</span>
+              <span>Contact</span>
+            </div> -->
+            <ul class="nav-list">
+              <li><a routerLink="">Home</a></li>
+              <li><a routerLink="/about">About</a></li>
+              <li><a routerLink="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar2">
+          <ul>
+            <li>
+              <div class="dropdown">
+                <button class="dropbtn btn">Login</button>
+                <!-- <button class="dropbtn">Dashboard</button> -->
+
+                <div class="dropdown-content">
+                  <a [routerLink]="['/login', 'customer']">Login as Customer</a>
+                  <hr>
+                  <a [routerLink]="['/login', 'dpartner']">Login as DeliveryPartner</a>
+                  <!-- <a *ngIf="isUserLoggedIn" [routerLink]="['/dashboard']">Go to Dashboard</a> -->
+                </div>
+              </div>
+            </li>
+
+            <li><a routerLink="order/select-city"><button class="btn">Book a delivery</button></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
