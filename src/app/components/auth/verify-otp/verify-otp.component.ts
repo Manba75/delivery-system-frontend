@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationComponent } from '../../../utils/notification/notification.component';
+import { query } from '@angular/animations';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -10,39 +15,77 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VerifyOTPComponent implements OnInit {
 
-  userType: string = ''; // 'customer' or 'deliverypartner'
-  // token: string = '';
-  // otp: string = '';
-  // apiUrl = 'https://yourapi.com'; // Your Backend API URL
+  @ViewChild(NotificationComponent) notification!: NotificationComponent;
+  public userType: string = 'customer';
+  public email: string = '';
+  public verifyOTPForm!: FormGroup;
+  public submitted: boolean = false;
+  public loading: boolean = false;
 
-  constructor() {}
-  // private route: ActivatedRoute,
-  // private router: Router
+  constructor(private route: ActivatedRoute,private authservice: AuthService,private router: Router,private fb:FormBuilder,private cookieservice:CookieService) { }
+
   ngOnInit() {
-    // this.route.paramMap.subscribe((params) => {
-    //   this.userType = params.get('userType') || 'customer';
-    // });
+    this.route.paramMap.subscribe((params) => {
+      this.userType = params.get('userType') || 'customer';
+    });
 
-    // this.route.queryParamMap.subscribe((queryParams) => {
-    //   this.token = queryParams.get('token') || '';
-    // });
+    this.route.queryParams.subscribe(params => {
+      this.email = params['email'];
+    });
+    console.log("email",this.email)
+
+    this.verifyOTPForm = this.fb.group({
+      otp: ['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern('^[0-9]*$')]]
+    });
   }
 
-  // verifyOtp() {
-  //   const data = {
-  //     token: this.token,
-  //     otp: this.otp
-  //   };
+  verifyOTP() {
+   this.submitted = true;
+    if (this.verifyOTPForm.invalid) {
+      this.loading = false;
+      this.verifyOTPForm.markAllAsTouched();
+      return;
+    }
+    this.loading = true;
+    let data=this.verifyOTPForm.value;
 
-  //   this.http.post(`${this.apiUrl}/${this.userType}/verify-otp`, data).subscribe({
-  //     next: (res) => {
-  //       alert('OTP Verified Successfully');
-  //       this.router.navigate([`/dashboard/${this.userType}`]); // Redirect to respective dashboard
-  //     },
-  //     error: () => {
-  //       alert('OTP Verification Failed');
-  //     }
-  //   });
-  // }
+    let userdata={
+      email:this.email,
+      otp:data.otp
+    }
+
+
+    let verifyOTPApi=this.userType=='customer'?this.authservice.customerverifyOtp(userdata):this.authservice.dpartnerverifyOtp(userdata);
+
+    verifyOTPApi.subscribe({
+
+      next:(response)=>{
+
+        if( response && response.status_code=='1'){
+          this.notification.showMessage(response.status_message,"success");
+          let token = response.data.token;
+          console.log("t",token)
+
+          localStorage.setItem('authToken', token);
+          this.cookieservice.set('authToken', token, 7, '/');
+          setTimeout(() => {
+            this.router.navigate([`${this.userType}/login`]);
+          }, 1000);
+
+        }else{
+          this.notification.showMessage(response.status_message, "error" )
+        }
+      },
+      error:(error)=>{
+
+        this.notification.showMessage("somthing went wrong","error");
+      },
+      complete:()=>{
+        this.loading=false;
+      }
+    })
+
+
+  }
 
 }

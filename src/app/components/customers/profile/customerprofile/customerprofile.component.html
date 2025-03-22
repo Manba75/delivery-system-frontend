@@ -16,83 +16,107 @@
             <button class="notification">
               <i class="fa fa-bell "></i>
              </button>
-             <button class="profile">
+             <!-- <button class="profile">
               <i class="fa fa-user"></i>
-             </button>
+             </button> -->
          </div>
         </div>
      </div>
     </div>
-</div>
-<div class="profile-container1">
-  <div class="profile-body">
-   <div class="profile-header-2">
-      <div class="profile-header-2-title">
-         <h1>Manba chauhan</h1>
-         <small>{{"manba@gmail.com"}} </small>
-      </div>
-      <div class="profile-header-2-action">
-          <div class="">
-            <button class="btn">Edit</button>
+    <div class="profile-container1">
+      <div class="profile-body">
+       <!-- <div class="profile-header-2">
+          <div class="profile-header-2-title">
+             <h1>Manba chauhan</h1>
+             <small>{{"manba@gmail.com"}} </small>
           </div>
-      </div>
-   </div>
-   <div class="profile-form-body">
-    <form class="profile-form">
-       <div class="profile-form-group">
-          <div class="profile-form-control">
-             <div class="profile-form-control1">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" placeholder="First Name">
-             </div>
-             <div class="profile-form-control2">
+          <div class="profile-header-2-action">
+            <div class="">
+              <button class="btn">Edit</button>
+            </div>
+        </div>
+
+       </div> -->
+       <div class="profile-form-body">
+        <form [formGroup]="profileForm" (ngSubmit)="updateprofile()" class="profile-form" #profileFormElement="ngForm">
+          <div class="profile-header-2">
+            <div class="profile-header-2-title">
+               <h1>{{userdata.cust_name}}</h1>
+               <small>{{userdata.cust_email}} </small>
+            </div>
+            <div class="profile-header-2-action">
+              <div class="">
+                <button class="btn">Edit</button>
+              </div>
+          </div>
+
+         </div>
+          <!-- Name Fields -->
+          <div class="profile-form-group form-group">
+            <div class="profile-form-control">
+              <div class="form-group profile-form-control1">
+                <label for="fname">Email</label>
+                <input type="text" id="fname" formControlName="cust_email" value="{{userdata.cust_email}}">
+              </div>
+              <div class="form-group profile-form-control2">
                 <label for="lname">Last Name</label>
-                <input type="text" id="lname" placeholder="Last Name">
-             </div>
+                <input type="text" id="lname" placeholder="Last Name" formControlName="name" value="{{userdata.cust_name}}">
+              </div>
+            </div>
           </div>
-       </div>
 
-       <div class="profile-form-group">
-          <div class="profile-form-control">
-             <div class="profile-form-control1">
+          <!-- Phone & Gender Fields -->
+          <div class="profile-form-group form-group">
+            <div class="profile-form-control">
+
+              <div class="form-group profile-form-control1">
                 <label for="phone">Phone</label>
-                <input type="text" id="phone" placeholder="Phone">
-             </div>
-             <div class="profile-form-control2">
-                <label for="gender">Gender</label>
-                <input type="text" id="gender" placeholder="Gender">
-             </div>
-          </div>
-       </div>
+                <input type="text" id="phone" placeholder="Phone" formControlName="phone">
+              </div>
+              <div class="form-group profile-form-control2">
+                <label for="street">Street</label>
+                <input type="text" id="street" placeholder="Street" formControlName="street">
+              </div>
 
-       <div class="profile-form-group">
-          <div class="profile-form-control">
-             <div class="profile-form-control1">
-                <label for="address1">AddressLine 1</label>
-                <input type="text" id="address1" placeholder="Address Line 1">
-             </div>
-             <div class="profile-form-control2">
-                <label for="address2">AddressLine 2</label>
-                <input type="text" id="address2" placeholder="Address Line 2">
-             </div>
+            </div>
           </div>
-       </div>
 
-       <div class="profile-form-group">
-          <div class="profile-form-control">
-             <div class="profile-form-control1">
+          <!-- Address Line 1 (Street, Landmark, Area) -->
+          <div formGroupName="address1" class="profile-form-group form-group">
+            <div class="profile-form-control">
+              <div class="form-group profile-form-control2">
+                <label for="area">Flatno</label>
+                <input type="text" id="area" placeholder="Area" formControlName="flatno">
+              </div>
+              <div class="form-group profile-form-control2">
+                <label for="landmark">Landmark</label>
+                <input type="text" id="landmark" placeholder="Landmark" formControlName="landmark">
+              </div>
+            </div>
+
+
+          </div>
+          <!-- City & Zip Code -->
+          <div class="profile-form-group form-group">
+            <div class="profile-form-control">
+              <div class="form-group profile-form-control1">
                 <label for="city">City</label>
-                <input type="text" id="city" placeholder="City">
-             </div>
-             <div class="profile-form-control2">
+                <input type="text" id="city" placeholder="City" formControlName="city">
+              </div>
+              <div class="form-group profile-form-control2">
                 <label for="zip">Zip</label>
-                <input type="text" id="zip" placeholder="Zip">
-             </div>
+                <input type="text" id="zip" placeholder="Zip" formControlName="zip">
+              </div>
+            </div>
           </div>
-       </div>
-    </form>
- </div>
 
+
+        </form>
+
+     </div>
+
+    </div>
+    </div>
 </div>
-</div>
+
 </div>

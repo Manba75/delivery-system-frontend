@@ -11,6 +11,7 @@
         <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
        </div>
       </div>
+      <app-notification></app-notification>
       <div class="login-container">
         <div class="login-header">
           <div class="login-icon">
@@ -19,16 +20,24 @@
           <h2> Check Your Mail !</h2>
         </div>
         <div class="login-body">
-          <form>
+          <app-loader [isLoading]="loading"></app-loader>
+          <form [formGroup]="verifyOTPForm" (ngSubmit)="verifyOTP()" #verifyOTPFormElement="ngForm">
             <div class="form-group">
               <label for="OTP">OTP</label>
-              <input type="OTP" formControlName="OTP" class="form-control" id="OTP"
+              <input type="number" formControlName="otp" class="form-control" id="otp"
                placeholder="Enter OTP">
             </div>
-            <a [routerLink]="userType === 'customer' ? '/login/customer' : '/login/deliverypartner'" class="register-link">
-            <button type="submit" class="btn login-btn">Login Now</button></a>
-          </form>
 
+            <button type="submit" class="btn login-btn">continue Now</button>
+          </form>
+          <div class="login-footer">
+            <p class="text-center">you have remember
+              <a [routerLink]="userType === 'customer' ? '/customer/login' : '/dpartner/login'" class="register-link">
+               resend OTP
+              </a>
+            </p>
+
+          </div>
         </div>
      </div>
      </div>

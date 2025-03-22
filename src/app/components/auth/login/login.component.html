@@ -11,7 +11,9 @@
       <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
      </div>
     </div>
+    <app-notification></app-notification>
     <div class="login-container">
+
       <div class="login-header">
         <div class="login-icon">
           <i class="fas fa-arrow-right-long"></i>
@@ -19,21 +21,49 @@
         <h2>{{ userType === 'customer' ? 'Customer' : 'Delivery Partner' }} Login </h2>
       </div>
       <div class="login-body">
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" #loginFormElement="ngForm">
+          <app-loader [isLoading]="loading"></app-loader>
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+            <small class="text-danger" *ngIf="(submitted || loginForm.get('email')?.touched) && loginForm.get('email')?.errors?.['required']">
+              Email is required
+            </small>
+            <small class="text-danger" *ngIf="(submitted || loginForm.get('email')?.touched) && loginForm.get('email')?.errors?.['email']">
+              Email is invalid
+            </small>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+            <small class="text-danger"
+            *ngIf="(submitted || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.['required']">
+            Password is required
+          </small>
+
+          <small class="text-danger"
+            *ngIf="loginForm.get('password')?.errors?.['minlength '] && loginForm.get('password')?.touched">
+            Password must be at least 8 characters
+          </small>
+
+          <small class="text-danger"
+            *ngIf="loginForm.get('password')?.errors?.['maxlength'] && loginForm.get('password')?.touched">
+            Password must not exceed 15 characters
+          </small>
+
+          <small class="text-danger"
+            *ngIf="loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.touched">
+            Password must contain at least one uppercase, one lowercase letter, and one number
+          </small>
           </div>
           <div class="form-group">
             <div class="center">
               <div class="text-right">
-                <a [routerLink]="['/forgot-password', userType]" class="forgot-password link">
-                  Forgot Password?
-                </a>
+                <a [routerLink]="[userType === 'customer' ? '/customer/forgot-password' : '/dpartner/forgot-password']"
+                class="forgot-password link">
+               Forgot Password?
+             </a>
+
             </div>
             </div>
           </div>
@@ -41,7 +71,7 @@
         </form>
         <div class="login-footer">
           <p class="text-center">Don't have an account?
-            <a [routerLink]="userType === 'customer' ? '/customer/signup' : '/deliverypartners/signup'" class="link">
+            <a [routerLink]="userType === 'customer' ? '/customer/signup' : '/dpartner/signup'" class="link">
               Signup
             </a>
 

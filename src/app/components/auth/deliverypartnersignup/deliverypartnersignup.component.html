@@ -1,72 +1,138 @@
 <div class="login">
   <div class="row">
-   <div class="left">
-    <div class="login-image-container">
-      <img src="../../../assets/img/dpartnersignup.png" alt="login" class="login-image">
-    </div>
-   </div>
-   <div class="right">
-    <div class="logo-container">
-     <div class="logo">
-      <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
-     </div>
-    </div>
-    <div class="login-container">
-      <div class="login-header">
-        <div class="login-icon">
-          <i class="fas fa-arrow-right-long"></i>
-        </div>
-        <h2>Delivery partner Signup</h2>
+    <div class="left">
+      <div class="login-image-container">
+        <img src="../../../assets/img/dpartnersignup.png" alt="login" class="login-image">
       </div>
-      <div class="login-body">
-        <form>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="right">
+      <div class="logo-container">
+        <div class="logo">
+          <img src="../../../assets/img/logo.png" alt="logo" class="logo-img">
+        </div>
+      </div>
+      <app-notification></app-notification>
+      <div class="login-container">
+        <div class="login-header">
+          <div class="login-icon">
+            <i class="fas fa-arrow-right-long"></i>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <label for="password">Licence Number</label>
-            <input type="text" formControlName="licence" class="form-control" id="licence" placeholder="Licence Number">
-          </div>
-          <div class="form-group">
-            <label for="vehiclename">Vehicle Name</label>
-            <input type="text" formControlName="vehiclename" class="form-control" id="vehiclename" placeholder="vehicle Name">
-          </div>
-          <div class="form-group">
-            <label for="vehiclenumber">Vehicle Number</label>
-            <input type="text" formControlName="vehiclenumber" class="form-control" id="vehiclenumber" placeholder="Vehicle Number">
-          </div>
-          <div class="form-group">
-            <select formControlName="vehicleType" class="dropdown" id="vehicleType">
-              <option value="" disabled selected>Select vehicleType</option>
-              <option value="Two Wheeler">Two Wheeler</option>
-              <option value="Three Wheeler">Three Wheeler</option>
-              <option value="Four Wheeler">Four Wheeler</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select formControlName="city" class="dropdown" id="city" >
+          <h2>Delivery Partner Signup</h2>
+        </div>
+        <div class="login-body">
+          <app-loader [isLoading]="loading"></app-loader>
+          <form [formGroup]="dpartnersignupform" (ngSubmit)="dpartnersignup()"  #dpartnerSignupFormElement="ngForm">
+
+            <!-- Email -->
+            <div class="sub-form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" formControlName="dpartner_email" class="form-control" id="email" placeholder="Enter email">
+                <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['required']" class="text-danger">
+                  Email is required
+                </small>
+                <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['email']" class="text-danger">
+                  Invalid email format
+                </small>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="dpartner_pass" class="form-control" id="password" placeholder="Password">
+                <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_pass')?.touched) && dpartnersignupform.get('dpartner_pass')?.errors?.['required']" class="text-danger">
+                  Password is required
+                </small>
+                <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_password')?.touched) && dpartnersignupform.get('dpartner_password')?.errors?.['pattern']" class="text-danger">
+                  Password must be 8-15 characters, include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character.
+                </small>
+              </div>
+            </div>
+
+            <div class="sub-form">
+              <!-- License Number -->
+            <div class="form-group">
+              <label for="licence">Licence Number</label>
+              <input type="text" formControlName="dpartner_licence" class="form-control" id="licence" placeholder="Licence Number">
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_licence')?.touched) && dpartnersignupform.get('dpartner_licence')?.errors?.['required']" class="text-danger">
+                Licence Number is required
+              </small>
+            </div>
+
+            <!-- Vehicle Name -->
+            <div class="form-group">
+              <label for="vehiclename">Vehicle Name</label>
+              <input type="text" formControlName="vehicle_name" class="form-control" id="vehiclename" placeholder="Vehicle Name">
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('vehicle_name')?.touched) && dpartnersignupform.get('vehicle_name')?.errors?.['required']" class="text-danger">
+                Vehicle name is required
+              </small>
+            </div>
+            </div>
+
+           <div class="sub-form">
+             <!-- Vehicle Number -->
+             <div class="form-group">
+              <label for="vehiclenumber">Vehicle Number</label>
+              <input type="text" formControlName="vehicle_number" class="form-control" id="vehiclenumber" placeholder="Vehicle Number">
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('vehicle_number')?.touched) && dpartnersignupform.get('vehicle_number')?.errors?.['required']" class="text-danger">
+                Vehicle number is required
+              </small>
+            </div>
+
+            <!-- Vehicle Type Dropdown -->
+            <div class="form-group">
+              <label for="vehicleType">Vehicle Type</label>
+              <select formControlName="vehicletype" class="dropdown" id="vehicleType" aria-label="Select Vehicle Type">
+                <option value="" disabled selected>Select vehicleType</option>
+              <option *ngFor=" let vehicletype of vehicletypes" [value]="vehicletype.vehicletype_type">
+                {{ vehicletype.vehicletype_type }}
+              </option>
+              </select>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('vehicletype')?.touched) && dpartnersignupform.get('vehicletype')?.errors?.['required']" class="text-danger">
+                Vehicle type is required
+              </small>
+            </div>
+            </div>
+
+            <div class="sub-form">
+              <!-- City Dropdown -->
+            <div class="form-group">
+              <label for="city">City</label>
+              <select formControlName="city" class="dropdown" id="city"
+              aria-label="Select City"  >
               <option value="" disabled selected>Select City</option>
-              <option value="Ahmedabad">Ahmedabad</option>
-              <option value="Surat">Surat</option>
-              <option value="Rajkot">Rajkot</option>
-            </select>
-          </div>
+              <option *ngFor="let city of cities" [value]="city.city_name">
+                {{ city.city_name }}
+              </option>
+              </select>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('city')?.touched) && dpartnersignupform.get('city')?.errors?.['required']" class="text-danger">
+                City selection is required
+              </small>
+            </div>
 
-          <button type="submit" class="btn login-btn">Signup</button>
-        </form>
-        <div class="login-footer">
-          <p class="text-center">Already have an account? <a routerLink= "/login/deliverypartner"
-            class="link">Login</a></p>
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" formControlName="dpartner_phone" class="form-control" id="phone" placeholder="Phone Number">
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_phone')?.touched) && dpartnersignupform.get('dpartner_phone')?.errors?.['required']" class="text-danger">
+                Phone number is required
+              </small>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_phone')?.touched) && dpartnersignupform.get('dpartner_phone')?.errors?.['pattern']" class="text-danger">
+                Phone number must be 10 digits
+              </small>
+            </div>
+
+            </div>
+          <button type="submit" class="btn login-btn" >
+              <span *ngIf="!loading">Signup</span>
+              <span *ngIf="loading">Processing...</span></button>
+          </form>
+
+          <div class="login-footer">
+            <p class="text-center">Already have an account? <a routerLink="/dpartner/login" class="link">Login</a></p>
+          </div>
         </div>
       </div>
-   </div>
-   </div>
+    </div>
+  </div>
 </div>
-</div>
-
-

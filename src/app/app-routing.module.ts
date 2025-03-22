@@ -25,31 +25,32 @@ import { CustomerprofileComponent } from './components/customers/profile/custome
 import { LiveTrackingComponent } from './components/order/live-tracking/live-tracking.component';
 import { DpartnerdashboardComponent } from './components/deliverypartners/dashboard/dpartnerdashboard/dpartnerdashboard.component';
 import { DpartnerdashboardpageComponent } from './pages/deliverypartners/dpartnerdashboardpage/dpartnerdashboardpage.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  {path: '',component: HomeComponent},
+  {path: '',component: HomeComponent },
   {path:'about',component:AboutpageComponent},
   {path:'contact',component:ContactpageComponent},
   {path:'customer/signup',component:CustomerSignupComponent},
-  {path:'deliverypartners/signup',component:DpartnerSignupComponent},
-  {path:'verify-email/:userType',component:VerifyEmailPageComponent},
-
-  {path:'login/:userType',component:LoginpageComponent},
-  { path:'forgot-password/:userType',component:ForgotpasswordpageComponent},
-  {path:'reset-password/:userType',component:ResetpasswordpageComponent},
-  {path:'verify-otp/:userType',component:VerifyOTPpageComponent},
-  {path:'reset-password-success',component:ResetpasswordsuccesspageComponent},
-  {path:'customer/profile',component:CustomerprofilepageComponent},
-  {path:'deliverypartners/profile',component:DpartnerprofilepageComponent},
+  {path:'dpartner/signup',component:DpartnerSignupComponent},
+  {path:':userType/verify-email', component:VerifyEmailPageComponent},
+  {path:':userType/login',component:LoginpageComponent},
+  { path:':userType/forgot-password',component:ForgotpasswordpageComponent},
+  {path:':userType/reset-password',component:ResetpasswordpageComponent},
+  {path:':userType/verify-otp',component:VerifyOTPpageComponent},
+  {path:':userType/reset-password-success',component:ResetpasswordsuccesspageComponent},
+  {path:'customer/profile',component:CustomerprofilepageComponent, canActivate: [AuthGuard]},
+  {path:'dpartner/profile',component:DpartnerprofilepageComponent, canActivate: [AuthGuard]},
   {path:'order/select-city',component:SelectCitypageComponent},
   {path:'order/select-vehicletype',component:SelectVehicletypepageComponent},
   {path:'order/select-address',component:SelectAddresspageComponent},
   {path:'order/live-tracking',component:LiveTrackingpageComponent},
   {path:'order/payment',component:PaymentPageComponent},
   {path:'order/confirm-order',component:ConfirmOrderPageComponent},
-  {path:'deliverypartners/dashboard',component:DpartnerdashboardpageComponent},
+  {path:'dpartner/dashboard',component:DpartnerdashboardpageComponent},
 
-  {path:'dashboard',component:CustomerdashboardpageComponent},
+  {path:'customer/dashboard',component:CustomerdashboardpageComponent, canActivate: [AuthGuard]},
 
   {path: '**',component:ErrorPageComponent},
 

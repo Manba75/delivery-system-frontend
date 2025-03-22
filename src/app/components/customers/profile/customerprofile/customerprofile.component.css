@@ -1,4 +1,9 @@
-
+.main-hero{
+  width: 100%;
+  height: 100vh;
+min-height: 100vh;
+  background-size: cover;
+}
 
  .main-heading{
   color: #fff;
@@ -6,7 +11,7 @@
   font-weight: 700;
   letter-spacing: 1.2px;
   line-height: 2;
-  margin-top: 80px;
+  margin-top: 50px;
   text-align:center;
   position: relative;
   z-index: 999;
@@ -15,12 +20,12 @@
  .profile-container {
 
   width: 100%;
-  height: 500px;
+  height: 70px;
   margin: auto;
-  background-color: rgba(136, 137, 147, 0.3);
+  /* background-color: rgba(136, 137, 147, 0.3); */
   position: relative;
   z-index: 999;
-  margin-top: 60px;
+  margin-top: 0px;
   backdrop-filter:blur(10px);
 
 }
@@ -31,8 +36,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  z-index: -1;
+  /* height: 100%; */
+  z-index: 1;
   backdrop-filter: blur(10px);
 }
 
@@ -42,7 +47,7 @@
   margin: auto;
   color: #fff;
   font-size: 30px;
-  padding: 40px;
+  /* padding: 40px; */
   font-weight: 700;
   position: relative;
    z-index: 1100;
@@ -155,12 +160,12 @@
   position: relative;
   z-index: 999;
   backdrop-filter:blur(10px);
- margin-top: -160px;
+ margin-top: 60px;
  border-radius: 20px;
  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
- margin-bottom: 20px;
+ /* margin-bottom: 20px; */
  padding: 20px;
- top:-150px;
+ /* top:-150px; */
 }
 
 
@@ -184,6 +189,7 @@
 
 .profile-header-2-action .btn {
   background: var(--primary-color);
+
   color: white;
   padding: 10px 25px;
   border: none;
@@ -242,7 +248,11 @@
   border-color: #007bff;
 }
 
-
+.radio-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
 
 /* Responsive Styles */
 @media screen and (max-width: 1024px) {

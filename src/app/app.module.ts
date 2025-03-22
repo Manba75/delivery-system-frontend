@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
+
 
 import { HeroComponent } from './components/home/hero/hero.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -55,6 +57,13 @@ import { VerifyemailComponent } from './components/verifyemail/verifyemail.compo
 import { OrderHistroryComponent } from './components/order/order-histrory/order-histrory.component';
 import { OrderhistroryComponent } from './pages/orderhistrory/orderhistrory.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoaderComponent } from './utils/loader/loader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NotificationComponent } from './utils/notification/notification.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthInterceptor } from './services/auth.intercepter';
 
 @NgModule({
   declarations: [
@@ -109,16 +118,54 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PaymentPageComponent,
     VerifyemailComponent,
     OrderHistroryComponent,
-    OrderhistroryComponent
+    OrderhistroryComponent,
+    LoaderComponent,
+    NotificationComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-   ReactiveFormsModule,
+
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule, // Required for animations
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center', // Change position to top-center
+      timeOut: 1000,
+      progressBar: true,
+      closeButton: true,
+      preventDuplicates: true,
+      newestOnTop: true
+    })
+
 
   ],
-  providers: [],
+  exports: [
+    SignupComponent,
+    NotificationComponent,
+    LoaderComponent,
+    VerifyemailComponent,
+    VerifyOTPComponent,
+    LoginComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent,
+    DeliverypartnersignupComponent,
+    CustomerprofileComponent,
+    CustomerdashboardComponent,
+    DpartnerprofileComponent,
+    DpartnerdashboardComponent,
+    SelectCityComponent,
+    SelectVehicletypeComponent,
+    SelectAddressComponent,
+    LiveTrackingComponent,
+    AboutComponent,
+    ContactComponent,
+
+
+  ],
+  providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

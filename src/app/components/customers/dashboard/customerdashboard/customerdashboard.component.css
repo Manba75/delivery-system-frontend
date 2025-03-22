@@ -12,7 +12,10 @@
 }
 .main-hero {
   position: relative;
-  z-index: 1000;
+  z-index: 999;
+
+  top:80px;
+  /* padding-bottom: 40px; */
 }
 
 .content {
@@ -22,11 +25,12 @@
 /*  dashboard header  */
 .profile-container {
   width: 90%;
-  height: 100px;
+  /* height: 100px; */
   margin: auto;
   position: relative;
   z-index: 1000;
   margin-top: 120px;
+
 }
 .profile-container::after {
   content: "";
