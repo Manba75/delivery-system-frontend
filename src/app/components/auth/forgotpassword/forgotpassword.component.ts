@@ -52,7 +52,6 @@ export class ForgotpasswordComponent implements OnInit {
     forgotpasswordApi.subscribe({
       next: (res) => {
         if (res && res.status_code == '1') {
-          console.log("res",res);
           this.notification.showMessage(res.status_message, 'success');
         } else {
           this.notification.showMessage(res.status_message, 'error');
