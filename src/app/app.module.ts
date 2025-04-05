@@ -131,10 +131,6 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAdJq2lKrsSv6z2JAH9EhF4XcbXe9WHLds',
-      libraries: ['places'],
-    }),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center',
       timeOut: 1000,
