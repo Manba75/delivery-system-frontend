@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.customersignup = this.fb.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        email: ['', [Validators.required, Validators.email, Validators.minLength(10), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}$'), this.lowercaseValidator]],
         password: [
           '',
           [
@@ -48,12 +48,25 @@ export class SignupComponent implements OnInit {
 
 
   }
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+  toggleconfirmPasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  private lowercaseValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value || '';
+    return /[a-z]/.test(value) ? null : { lowercase: true };
+  }
 
   signupForm() {
     this.submitted = true;
 
     if (this.customersignup.invalid) {
-      this.customersignup.markAllAsTouched();
+      this.customersignup.markAsUntouched();
       return;
     }
 

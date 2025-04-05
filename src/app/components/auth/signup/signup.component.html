@@ -38,14 +38,27 @@
               *ngIf="(submitted || customersignup.get('email')?.touched) && customersignup.get('email')?.errors?.['required']">
               Email is required
             </small>
+            <small class="text-danger" *ngIf="( customersignup.get('email')?.touched) && customersignup.get('email')?.errors?.['email']">
+              Email is invalid
+            </small>
+            <small class="text-danger" *ngIf="( customersignup.get('email')?.touched) && customersignup.get('email')?.errors?.['pattern']">
+              Email is invalid
+            </small>
+            <small class="text-danger" *ngIf="( customersignup.get('email')?.touched) && customersignup.get('email')?.errors?.['minlength']">
+              Email minimum length is 10 characters
+            </small>
+
 
             </div>
 
             <!-- Password -->
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" formControlName="password" class="form-control" id="password"
-                placeholder="Password">
+              <div class="password-wrapper">
+                <input  [type]="showPassword ? 'text' : 'password'"  formControlName="password" class="form-control" id="password" placeholder="Password">
+                <span class="toggle-password" (click)="togglePasswordVisibility()">
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </span> </div>
               <small class="text-danger"
                 *ngIf="(submitted || customersignup.get('password')?.touched) && customersignup.get('password')?.errors?.['required']">
                 Password is required
@@ -70,8 +83,12 @@
             <!-- Confirm Password -->
             <div class="form-group">
               <label for="confirmpassword">Confirm Password</label>
-              <input type="password" formControlName="confirmpassword" class="form-control" id="confirmpassword"
-                placeholder="Confirm Password">
+              <div class="password-wrapper">
+                <input  [type]="showPassword ? 'text' : 'password'"  formControlName="confirmpassword" class="form-control" id="password" placeholder="Password">
+                <span class="toggle-password" (click)="toggleconfirmPasswordVisibility()">
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </span> </div>
+
                 <small class="text-danger"
                 *ngIf="(submitted || customersignup.get('confirmpassword')?.touched ) &&  customersignup.hasError('passwordMismatch')">
            Passwords do not match

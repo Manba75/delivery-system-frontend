@@ -52,7 +52,7 @@ import { LiveTrackingpageComponent } from './pages/order/live-trackingpage/live-
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { ConfirmOrderPageComponent } from './pages/confirm-order-page/confirm-order-page.component';
 import { VerifyEmailPageComponent } from './pages/verify-email-page/verify-email-page.component';
-import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { PaymentPageComponent } from './components/order/payment-page/payment-page.component';
 import { VerifyemailComponent } from './components/verifyemail/verifyemail.component';
 import { OrderHistroryComponent } from './components/order/order-histrory/order-histrory.component';
 import { OrderhistroryComponent } from './pages/orderhistrory/orderhistrory.component';
@@ -64,6 +64,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotificationComponent } from './utils/notification/notification.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './services/auth.intercepter';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,6 @@ import { AuthInterceptor } from './services/auth.intercepter';
     Section2Component,
     Section3Component,
     Section4Component,
-
     LoginComponent,
     LoginpageComponent,
     SignupComponent,
@@ -122,23 +122,27 @@ import { AuthInterceptor } from './services/auth.intercepter';
     LoaderComponent,
     NotificationComponent,
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule, // Required for animations
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAdJq2lKrsSv6z2JAH9EhF4XcbXe9WHLds',
+      libraries: ['places'],
+    }),
     ToastrModule.forRoot({
-      positionClass: 'toast-top-center', // Change position to top-center
+      positionClass: 'toast-bottom-center',
       timeOut: 1000,
       progressBar: true,
       closeButton: true,
       preventDuplicates: true,
       newestOnTop: true
-    })
+    }),
 
 
   ],
@@ -162,6 +166,8 @@ import { AuthInterceptor } from './services/auth.intercepter';
     LiveTrackingComponent,
     AboutComponent,
     ContactComponent,
+    HeaderComponent,
+
 
 
   ],

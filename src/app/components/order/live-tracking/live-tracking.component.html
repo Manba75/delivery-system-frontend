@@ -15,7 +15,7 @@
                <div class="address-body">
                      <div class="pickup-address-header">
                        <h3>Pickup Address</h3>
-                       <h4>Order : ANCJHDJD</h4>
+                       <h4>Order : {{orderid}}</h4>
                        </div>
                        <div class="pickup-address-body">
                          <div class="pickup-order">
@@ -23,7 +23,7 @@
                          </div>
                          <div class="pickup-address">
                                  <h5>Address</h5>
-                                 <p> 123, 4th cross, 5th main, 6th block, koramangala, bangalore, 560034</p>
+                                 <p>{{finalpickupaddress}}</p>
                          </div>
                        </div>
 
@@ -31,7 +31,7 @@
                <div class="address-body">
                 <div class="pickup-address-header">
                   <h3>Drop Address</h3>
-                  <h4>Order : ANCJHDJD</h4>
+
                   </div>
                   <div class="pickup-address-body">
                     <div class="pickup-order">
@@ -39,13 +39,14 @@
                     </div>
                     <div class="pickup-address">
                             <h5>Address</h5>
-                            <p> 123, 4th cross, 5th main, 6th block, koramangala, bangalore, 560034</p>
+                            <p> {{finaldropaddress}}</p>
                     </div>
                   </div>
 
           </div>
           </div>
           <div class="tracking-map">
+            <div id="map" style="height: 550px; width: 100%;"></div>
           </div>
 
         </div>

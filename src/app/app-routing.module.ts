@@ -17,7 +17,7 @@ import { SelectVehicletypepageComponent } from './pages/order/select-vehicletype
 import { SelectAddresspageComponent } from './pages/order/select-addresspage/select-addresspage.component';
 import { LiveTrackingpageComponent } from './pages/order/live-trackingpage/live-trackingpage.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { PaymentPageComponent } from './components/order/payment-page/payment-page.component';
 import { VerifyEmailPageComponent } from './pages/verify-email-page/verify-email-page.component';
 import { ConfirmOrderPageComponent } from './pages/confirm-order-page/confirm-order-page.component';
 import { CustomerdashboardpageComponent } from './pages/customer/customerdashboardpage/customerdashboardpage.component';
@@ -27,6 +27,7 @@ import { DpartnerdashboardComponent } from './components/deliverypartners/dashbo
 import { DpartnerdashboardpageComponent } from './pages/deliverypartners/dpartnerdashboardpage/dpartnerdashboardpage.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthGuard } from './services/auth.guard';
+// import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   {path: '',component: HomeComponent },
@@ -40,17 +41,25 @@ const routes: Routes = [
   {path:':userType/reset-password',component:ResetpasswordpageComponent},
   {path:':userType/verify-otp',component:VerifyOTPpageComponent},
   {path:':userType/reset-password-success',component:ResetpasswordsuccesspageComponent},
+
+  //customer
+
+  {path:'customer/dashboard',component:CustomerdashboardpageComponent, canActivate: [AuthGuard]},
   {path:'customer/profile',component:CustomerprofilepageComponent, canActivate: [AuthGuard]},
-  {path:'dpartner/profile',component:DpartnerprofilepageComponent, canActivate: [AuthGuard]},
+
+  //dpartner
+  {path:'dpartner/dashboard',component:DpartnerdashboardpageComponent,canActivate:[AuthGuard],pathMatch:'full'},
+  {path:'dpartner/profile',component:DpartnerprofilepageComponent, canActivate: [AuthGuard],pathMatch:'full'},
+
+
+  //order
   {path:'order/select-city',component:SelectCitypageComponent},
   {path:'order/select-vehicletype',component:SelectVehicletypepageComponent},
   {path:'order/select-address',component:SelectAddresspageComponent},
-  {path:'order/live-tracking',component:LiveTrackingpageComponent},
+  {path:'order/live-tracking/:id',component:LiveTrackingpageComponent},
   {path:'order/payment',component:PaymentPageComponent},
   {path:'order/confirm-order',component:ConfirmOrderPageComponent},
-  {path:'dpartner/dashboard',component:DpartnerdashboardpageComponent},
 
-  {path:'customer/dashboard',component:CustomerdashboardpageComponent, canActivate: [AuthGuard]},
 
   {path: '**',component:ErrorPageComponent},
 
@@ -58,7 +67,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+   ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

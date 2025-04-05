@@ -44,13 +44,36 @@
             <div class="dropdown">
               <button class="dropbtn btn">Login</button>
               <div class="dropdown-content">
-                <a [routerLink]="['/customer/login']">Login as Customer</a>
+                <a [routerLink]="['/customer/verify-email']">Login as Customer</a>
                 <hr>
-                <a [routerLink]="['/dpartner/login']">Login as Delivery Partner</a>
+                <a [routerLink]="['/dpartner/verify-email']">Login as Delivery Partner</a>
               </div>
             </div>
           </li>
-           <li><a routerLink="order/select-city"><button class="btn">Book a delivery</button></a></li>
+          <li *ngIf="userType === 'customer' && isUserLoggedIn">
+            <a routerLink="/order/select-vehicletype">
+              <button class="btn">Book a delivery</button>
+            </a>
+          </li>
+
+          <li *ngIf="userType === 'dpartner' && isUserLoggedIn">
+            <div class="switch-button">
+              <input
+                class="switch-button-checkbox"
+                id="availabilityToggle"
+                type="checkbox"
+                [checked]="isAvailable"
+              
+                (change)="setAvailability($event)"
+              />
+              <label class="switch-button-label" for="availabilityToggle">
+                <span class="switch-button-label-span">
+                  {{ isAvailable ? 'Available' : ' unAvailable' }}
+                </span>
+              </label>
+            </div>
+          </li>
+
            <li *ngIf="isUserLoggedIn" class="last-child">
             <div class="main-info">
               <button class="profile-info" (click)="toggleProfileDropdown($event)">
@@ -59,8 +82,8 @@
               </button>
               <div class="main-user-info">
                 <ul class="user-info"  *ngIf="isProfileDropdownOpen">
-                  <li><a routerLink="/customer/dashboard" (click)="closeDropdown($event)"><i class="fa fa-user-astronaut"></i> Dashboard</a></li>
-                  <li><a routerLink="/customer/profile" (click)="closeDropdown($event)"><i class="fa fa-user-astronaut"></i> Profile</a></li>
+                  <li><a [routerLink]="['/' + userType + '/dashboard']" (click)="closeDropdown($event)"><i class="fa fa-user-astronaut"></i> Dashboard</a></li>
+                  <li><a [routerLink]="['/' + userType + '/profile']" (click)="closeDropdown($event)"><i class="fa fa-user-astronaut"></i> Profile</a></li>
                   <li><a routerLink="javascript:void(0)" (click)="logout(); closeDropdown($event)"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
               </div>

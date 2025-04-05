@@ -31,15 +31,26 @@
                 <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['required']" class="text-danger">
                   Email is required
                 </small>
-                <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['email']" class="text-danger">
+                <small *ngIf="( dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['email']" class="text-danger">
                   Invalid email format
                 </small>
+                <small class="text-danger" *ngIf="(dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['pattern']">
+                  Email is invalid
+                </small>
+                <small class="text-danger" *ngIf="( dpartnersignupform.get('dpartner_email')?.touched) && dpartnersignupform.get('dpartner_email')?.errors?.['minlength']">
+                  Email minimum length is 10 characters
+                </small>
+
               </div>
 
               <!-- Password -->
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" formControlName="dpartner_pass" class="form-control" id="password" placeholder="Password">
+                <div class="password-wrapper">
+                  <input  [type]="showPassword ? 'text' : 'password'"  formControlName="dpartner_pass" class="form-control" id="password" placeholder="Password">
+                  <span class="toggle-password" (click)="togglePasswordVisibility()">
+                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </span> </div>
                 <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_pass')?.touched) && dpartnersignupform.get('dpartner_pass')?.errors?.['required']" class="text-danger">
                   Password is required
                 </small>
@@ -55,8 +66,18 @@
               <label for="licence">Licence Number</label>
               <input type="text" formControlName="dpartner_licence" class="form-control" id="licence" placeholder="Licence Number">
               <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_licence')?.touched) && dpartnersignupform.get('dpartner_licence')?.errors?.['required']" class="text-danger">
-                Licence Number is required
+                Licence Number is required.
               </small>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_licence')?.touched) && dpartnersignupform.get('dpartner_licence')?.errors?.['minlength']" class="text-danger">
+                Licence Number must be at least 10 characters long.
+              </small>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_licence')?.touched) && dpartnersignupform.get('dpartner_licence')?.errors?.['maxlength']" class="text-danger">
+                Licence Number cannot exceed 15 characters.
+              </small>
+              <small *ngIf="(isSubmitted || dpartnersignupform.get('dpartner_licence')?.touched) && dpartnersignupform.get('dpartner_licence')?.errors?.['pattern']" class="text-danger">
+                Licence Number must contain only uppercase letters, lowercase letters, and numbers.
+              </small>
+
             </div>
 
             <!-- Vehicle Name -->

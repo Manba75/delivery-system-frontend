@@ -59,6 +59,11 @@ export class ResetpasswordComponent implements OnInit {
       confirmpassword: ['', Validators.required]
     }, { validators: matchPassword });
   }
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   resetpassword() {
     this.submitted = true;

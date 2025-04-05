@@ -1,155 +1,148 @@
-<div class="main-hero">
-
-
+<div class="main">
+  <!-- <app-header></app-header> -->
 
   <div class="content">
     <div class="header">
       <div class="sort-order">
         <label for="sort">Filter </label>
-       <div class="dropdown">
-        <select id="sort">
-          <option value="Today" default >Today</option>
-          <option value="Today">Last week</option>
-          <option value="Today">Last week</option>
-        </select>
-       </div>
-       </div>
-       <div class="profile-header-action">
+        <div class="dropdown">
+          <select [formControl]="selectedFilter">
+            <option value="all">all</option>
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="last_week">Last Week</option>
+            <option value="last_month">Last Month</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="profile-header-action">
 
         <button class="notification">
           <i class="fa fa-bell "></i>
-         </button>
-         <div class="main-profile">
+        </button>
+        <div class="main-profile">
           <!-- Profile Button -->
-          <button class="profile" (click)="toggleDropdown()">
+          <!-- <button class="profile" (click)="toggleDropdown()">
             <i class="fa fa-user"></i>
             <span class="username">John Smith</span>
             <i class="fa fa-chevron-down dropdown-icon"></i>
-          </button>
+          </button> -->
 
           <!-- Dropdown Content -->
-          <div class="user-info" *ngIf="isDropdownOpen">
+          <!-- <div class="user-info" *ngIf="isDropdownOpen">
 
             <a href="#">Profile</a>
             <a href="#">Logout</a>
-          </div>
+          </div> -->
         </div>
 
 
-     </div>
+      </div>
     </div>
     <div class="dashboard">
-
-
       <h2>Dashboard</h2>
-
       <div class="stats">
         <div class="stat">
-         <div class="content-stat">
-          <p>125</p>
-          <span>New order</span>
-         </div>
-          <div class="icon">
-            <div class="img">
-              <img src="../../../../assets/img/new_order.png" alt="img" />
-            </div>
+          <div class="content-stat">
+            <p><p>{{ totlePedingOrders()}}</p>
+            <span>New Orders</span>
           </div>
         </div>
         <div class="stat">
           <div class="content-stat">
-           <p>22</p>
-           <span>Process</span>
-          </div>
-           <div class="icon">
-             <div class="img">
-               <img src="../../../../assets/img/process.png" alt="img" />
-             </div>
-           </div>
-         </div>
-         <div class="stat">
-          <div class="content-stat">
-           <p>225</p>
-           <span>Delivery</span>
-          </div>
-           <div class="icon">
-             <div class="img">
-               <img src="../../../../assets/img/delivery.png" alt="img" />
-             </div>
-           </div>
-         </div>
-         <div class="stat">
-          <div class="content-stat">
-           <p>15</p>
-           <span>Arrived</span>
-          </div>
-           <div class="icon">
-             <div class="img">
-               <img src="../../../../assets/img/arrived.png" alt="img" />
-             </div>
-           </div>
-         </div>
-      </div>
+            <!-- <p>Pending Orders: {{ orders?.filter(order => order.order_status === 'pending')?.length || 0 }}</p> -->
 
+            <p>{{ totleAcceptedOrders()}}</p>
+            <span>Pickup</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="content-stat">
+            <p>{{  totaleInProgressOrders() }}</p>
+            <span>Progress</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="content-stat">
+            <p>{{ totleDeliveredOrders() }}</p>
+            <span>Delivered</span>
+          </div>
+        </div>
+
+      </div>
+      <app-notification></app-notification>
       <div class="table-container">
+        <h3>Order List</h3>
         <table>
+          <app-loader [isLoading]="loading"></app-loader>
           <thead>
             <tr>
-              <th>Order Request</th>
-              <th>Order Date</th>
+              <th>Order No.</th>
               <th>Customer Name</th>
+              <th>Order Date</th>
               <th>Pickup Address</th>
               <th>Drop Address</th>
-              <th>Status</th>
               <th>Order Charge</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let order of orders">
-              <td>{{ order.request }}</td>
-              <td>{{ order.orderDate }}</td>
-              <td>{{ order.customer }}</td>
-              <td>{{ order.pickupaddress }}</td>
-              <td>{{ order.dropaddress }}</td>
 
+            <tr *ngFor=" let order of  paginatedOrders ">
+              <td>{{ order.id}}</td>
+
+              <td>{{ order.order_date | date }}</td>
+              <td>{{ order.cust_name }}</td>
+              <td>{{ order.pickup_address }}</td>
+              <td>{{ order.drop_address }}</td>
+              <td>{{ order.order_delivery_charge | currency }}</td>
+              <td><span [class]="getStatusClass(order.order_status)">{{ order.order_status }}</span></td>
               <td>
-                <span  class="status" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span>
-              </td>
-              <td>{{ order.totalCharge }}</td>
-             <td>
-              <button class="edit-btn" (click)="openEditModal(order)">
-                <i class="fa fa-edit 2xl" style="color: var(--secondary-color);">
 
-                </i>
-             </button></td>
+                <div class="order-btn" *ngIf="order.order_status === 'pending'">
+                  <button *ngIf="order.order_status === 'pending' " (click)="acceptOrder(order)"
+                  class="btn btn-success">Accept</button>
+<!--
+                  <button *ngIf="order.order_status === 'pending'" (click)="rejectOrder(order)"
+                  class="btn btn-success">Reject</button> -->
+                </div>
+                <div *ngIf="order.order_status === 'pickup'" class="order-otp" >
+
+                  <input type="number" placeholder="Enter OTP" [formControl]="otp" class="otp-input">
+                  <div *ngIf="order.order_status === 'pickup'">
+                    <button (click)="verifyOtp(order)" class="btn btn-primary">Verify OTP</button>
+                </div>
+
+                </div>
+
+                <ng-container *ngIf="order.order_status !== 'pending' && order.order_status !== 'pickup'">
+                  <button *ngIf="order.order_status !== 'delivered' "
+                  (click)="updateOrderStatus(order, getNextStatus(order.order_status))" class="btn btn-primary">
+                  {{ getNextActionText(order) }}
+                </button>
+                </ng-container>
+                </td>
             </tr>
+            <tr *ngIf="paginatedOrders.length === 0">
+              <td colspan="8" class="no-orders">
+                <p>No orders available</p>
+              </td>
+
+              <tr>
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="modal" [ngClass]="{'show': isModalOpen}" *ngIf="isModalOpen">
-      <div class="modal-content">
-        <h3>Edit Order Status</h3>
-
-        <form [formGroup]="statusForm">
-          <label for="status">Order Status:</label>
-          <select id="status" formControlName="status">
-            <option value="Pending">Pending</option>
-            <option value="Accepted">Accepted</option>
-            <option value="In-Progress">In-Progress</option>
-            <option value="Delivered">Delivered</option>
-          </select>
-        </form>
-
-        <div class="modal-actions">
-          <button class="btn" (click)="updateOrderStatus()">Save</button>
-          <button class="btn cancel" (click)="closeModal()">Cancel</button>
-        </div>
+      <div class="pagination">
+        <button class="btn" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button class="btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
       </div>
+
+
     </div>
 
 
   </div>
 </div>
-
-

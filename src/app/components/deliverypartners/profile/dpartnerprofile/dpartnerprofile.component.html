@@ -1,98 +1,172 @@
 <div class="main-hero">
-    <div class="profile-bg">
-      <h1 class="main-heading">Profile</h1>
-      <div class="profile-container">
-
-        <div class="profile-header">
-          <div class="profile-header-main">
-            <div class="profile-header-title">
-              <h3>Welcome Manba</h3>
-              <span>28 Nov 2024 </span>
-           </div>
-           <div class="profile-header-action">
-              <button class="notification">
-                <i class="fa fa-bell "></i>
-               </button>
-               <button class="profile">
-                <i class="fa fa-user"></i>
-               </button>
-           </div>
+  <div class="profile-bg">
+    <h1 class="main-heading">Profile</h1>
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="profile-header-main">
+          <div class="profile-header-title">
+            <h3> Welcome {{dpartnerdata.dpartner_name}}</h3>
+            <!-- <span>{{}}</span> -->
           </div>
-       </div>
-      </div>
+          <div class="profile-header-action">
+            <div class="search">
+              <i class="fa fa-search fa-2xl"></i><input type="text" placeholder="Search">
 
-  </div>
-
-  <div class="profile-container1">
-    <div class="profile-body">
-     <div class="profile-header-2">
-        <div class="profile-header-2-title">
-           <h1>Manba chauhan</h1>
-           <small>{{"manba@gmail.com "}}</small>
-        </div>
-        <div class="profile-header-2-action">
-            <div class="">
-              <button class="btn">Edit</button>
             </div>
+            <button class="notification">
+              <i class="fa fa-bell "></i>
+            </button>
+
+          </div>
         </div>
-     </div>
-     <div class="profile-form-body">
-        <form class="profile-form">
-           <div class="profile-form-group">
-             <div class="profile-form-control">
-              <div class="profile-form-control1">
-                <label for="name">First Name</label>
-                <input type="text" id="fname" placeholder=" First Name" >
-               </div>
-               <div class="profile-form-control2">
-                <label for="name">Last Name</label>
-                <input type="text" id="lname" placeholder="Last Name" >
-               </div>
-             </div>
-           </div>
+      </div>
+    </div>
+    <div class="profile-container1">
+      <app-notification></app-notification>
+      <div class="profile-body">
+        <app-loader [isLoading]="loading"></app-loader>
+        <div class="profile-form-body">
+          <form [formGroup]="dpartnerprofileform" (ngSubmit)=" updateProifle()" class="profile-form"
+            #dpartnerprofileFormElement="ngForm">
+            <div class="profile-header-2">
+              <div class="profile-header-2-title">
+                <h1>{{dpartnerdata.dpartner_name}}</h1>
+                <small>{{dpartnerdata.dparner_email}} </small>
+              </div>
+              <div class="profile-header-2-action">
+                <div class="">
+                  <button class="btn" type="submit">Edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="profile-form-group form-group">
+              <div class="profile-form-control">
+                <div class="form-group profile-form-control1">
+                  <label for="fname">Email</label>
+                  <input type="text" id="fname" formControlName="dpartner_email" [value]="dpartnerdata.dparner_email"
+                    [disabled]="true">
+                </div>
+                <div class="form-group profile-form-control2">
+                  <label for="lname">Full Name</label>
+                  <input type="text" id="lname" placeholder="Full Name" formControlName="dpartner_name">
+                </div>
+              </div>
+            </div>
+            <div class="profile-form-group form-group">
+              <div class="profile-form-control">
 
-           <div class="profile-form-group">
-            <div class="profile-form-control">
-              <div class="profile-form-control1">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone" placeholder="Phone" >
-               </div>
-               <div class="profile-form-control2">
-                <label for="name">Gender</label>
-                <input type="text" id="name" placeholder="Gernder" >
-               </div>
-             </div>
+                <div class="form-group profile-form-control1">
+                  <label for="phone">Phone</label>
+                  <input type="text" id="phone" placeholder="Phone" formControlName="dpartner_phone">
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_phone')?.touched) && dpartnerprofileform.get('dpartner_phone')?.errors?.['required']"
+                    class="text-danger">Phone number is required</small>
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_phone')?.touched) && dpartnerprofileform.get('dpartner_phone')?.errors?.['pattern']"
+                    class="text-danger">Phone number must be 10 digits</small>
+                </div>
+                <div class="form-group profile-form-control2">
+                  <label for="street">Licence Number</label>
+                  <input type="text" id="street" placeholder="Enter licence number"
+                    formControlName="dpartner_licence_number">
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_licence_number')?.touched) && dpartnerprofileform.get('dpartner_licence_number')?.errors?.['required']"
+                    class="text-danger">
+                    Licence Number is required.
+                  </small>
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_licence_number')?.touched) && dpartnerprofileform.get('dpartner_licence_number')?.errors?.['minlength']"
+                    class="text-danger">
+                    Licence Number must be at least 10 characters long.
+                  </small>
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_licence_number')?.touched) && dpartnerprofileform.get('dpartner_licence_number')?.errors?.['maxlength']"
+                    class="text-danger">
+                    Licence Number cannot exceed 15 characters.
+                  </small>
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('dpartner_licence_number')?.touched) && dpartnerprofileform.get('dpartner_licence_number')?.errors?.['pattern']"
+                    class="text-danger">
+                    Licence Number must contain only uppercase letters, lowercase letters, and numbers.
+                  </small>
+                </div>
 
-           </div>
-           <div class="profile-form-group">
-            <div class="profile-form-control">
-              <div class="profile-form-control1">
-                 <label for="address">AddressLine 1</label>
-                <input type="text" id="address" placeholder="Address" >
-               </div>
-               <div class="profile-form-control2">
-                <label for="address">AddressLine 2</label>
-               <input type="text" id="address" placeholder="Address" >
+              </div>
+            </div>
+            <div class="profile-form-group form-group">
+              <div class="profile-form-control">
+                <div class="form-group profile-form-control2">
+                  <label for="area">Vehicle Number</label>
+                  <input type="text" id="area" placeholder="Area" formControlName="vehicle_number">
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('vehicle_number')?.touched) && dpartnerprofileform.get('vehicle_number')?.errors?.['required']"
+                    class="text-danger">
+                    Vehicle number is required
+                  </small>
+                </div>
+                <div class="form-group profile-form-control2">
+                  <label for="landmark">Vehicle Name</label>
+                  <input type="text" id="vehicle_name" placeholder="Enter vehicle name" formControlName="vehicle_name">
+                  <small
+                    *ngIf="(issubmitted || dpartnerprofileform.get('vehicle_name')?.touched) && dpartnerprofileform.get('vehicle_name')?.errors?.['required']"
+                    class="text-danger">
+                    Vehicle name is required
+                  </small>
+                </div>
               </div>
 
-             </div>
-           </div>
-           <div class="profile-form-group">
-            <div class="profile-form-control">
 
-               <div class="profile-form-control1">
-                <label for="city">City</label>
-                <input type="text" id="city" placeholder="City" >
-               </div>
-               <div class="profile-form-control2">
-                <label for="zip">Zip</label>
-                <input type="text" id="zip" placeholder="Zip" >
-               </div>
-             </div>
-           </div>
-        </form>
-     </div>
-  </div>
-  </div>
+            </div>
+            <div class="profile-form-group form-group">
+              <div class="profile-form-control">
+                <div class="form-group profile-form-control1">
+                  <div class="sub-form">
+                  <div class="">
+                    <label for="city">City</label>
+                    <select formControlName="city_name" class="dropdown" id="city"
+                    aria-label="Select City"  >
+                    <option [value]="dpartnerdata.city_name" selected>{{dpartnerdata.city_name}}</option>
+                    <ng-container *ngFor="let city of cities">
+                      <option [hidden]="city.city_name === dpartnerdata.city_name" [value]="city.city_name">
+                        {{ city.city_name }}
+                      </option>
+                    </ng-container>
+                    </select>
+                    <small *ngIf="(issubmitted || dpartnerprofileform.get('city_name')?.touched) && dpartnerprofileform.get('city_name')?.errors?.['required']" class="text-danger">
+                      City selection is required
+                    </small>
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group profile-form-control2">
+                  <div class="sub-form">
+                  <div class="">
+                    <label for="vehicle">Vehicle Type</label>
+                    <select formControlName="vehicletype_type" class="dropdown" id="vehicletype_type"
+                    aria-label="Select Vehicle Type"  >
+                    <option [value]="dpartnerdata.vehicletype_type" selected>{{dpartnerdata.vehicletype_type}}</option>
+                    <ng-container *ngFor="let vehicletype  of vehicletypes">
+                      <option [hidden]="vehicletype.vehicletype_type === dpartnerdata.vehicletype_type" [value]="vehicletype.vehicletype_type">
+                        {{ vehicletype.vehicletype_type }}
+                      </option>
+                    </ng-container>
+                    </select>
+                    <small *ngIf="(issubmitted || dpartnerprofileform.get('vehicletype_type')?.touched) && dpartnerprofileform.get('vehicletype_type')?.errors?.['required']" class="text-danger">
+                      vehicle selection is required
+                    </small>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 
+</div>

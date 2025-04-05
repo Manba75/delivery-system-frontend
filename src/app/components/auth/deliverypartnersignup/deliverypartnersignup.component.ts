@@ -1,6 +1,6 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { NotificationComponent } from '../../../utils/notification/notification.component';
 import { Router } from '@angular/router';
@@ -20,21 +20,24 @@ export class DeliverypartnersignupComponent implements OnInit {
   cities: any = [];
   vehicletypes :any=[];
 
+
   constructor(private fb: FormBuilder, private authservice:AuthService,private router:Router, private cityservice: CityService,private vehicletypeservice:VehicletypeService,private cookieservice:CookieService) { }
 
   ngOnInit(): void {
     this.dpartnersignupform = this.fb.group({
-      dpartner_email: ['', [Validators.required, Validators.email]],
+      dpartner_email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}$'), this.lowercaseValidator]],
       dpartner_pass: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]+$')]],
       city: ['',[Validators.required]],
       dpartner_licence: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^[a-zA-Z0-9]+$')]],
       vehicle_name: ['',[Validators.required]],
       vehicletype: ['',[Validators.required]],
-      vehicle_number: ['',[Validators.required]],
-      dpartner_phone: ['',[Validators.required,Validators.pattern('^[0-9]{10}$')]]
+      vehicle_number: ['',[Validators.required, Validators.minLength(4),Validators.maxLength(6), Validators.pattern('^[A-Z0-9]+$')]],
+      dpartner_phone: ['',[Validators.required,Validators.pattern('^[0-9]{10}$')]],
+    }, {
+        validators:checkLicenseNumber
+    }
 
-
-    });
+  );
     this.cityservice.getCities().subscribe({
       next: (response) => {
         if (response && response.status_code === "1") {
@@ -50,7 +53,6 @@ export class DeliverypartnersignupComponent implements OnInit {
       next: (response) => {
         if (response && response.status_code === "1") {
           this.vehicletypes = response.data;
-          // console.log("v",response)
           console.log("Vehicletypes:", this.vehicletypes);
         }
       },
@@ -59,6 +61,13 @@ export class DeliverypartnersignupComponent implements OnInit {
       }
     });
   }
+
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+  // licence number validators
 
   dpartnersignup() {
 
@@ -92,6 +101,7 @@ export class DeliverypartnersignupComponent implements OnInit {
       },
       error: (error) => {
         this.loading = false;
+        this.notification.showMessage(error.status_message,"error");
         console.log(error);
       },
       complete: () => {
@@ -99,5 +109,16 @@ export class DeliverypartnersignupComponent implements OnInit {
       }
     });
   }
+  private lowercaseValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value || '';
+    return /[a-z]/.test(value) ? null : { lowercase: true };
+  }
 
 }
+function checkLicenseNumber(c: AbstractControl) {
+  const value = c.get('dpartner_licence')?.value;
+  return Object.keys(value).find(dpartner_licence => c ===
+  value)  || null;
+}
+
+

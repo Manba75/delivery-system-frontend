@@ -6,13 +6,14 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  public  userTpe: string='customer';
+  public  userTpe: string='';
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
       return true; // Allow access
     } else {
+      this.userTpe = localStorage.getItem('userType') || ''; // Get user type from local storage
       this.router.navigate([`${this.userTpe}/login`]); // Redirect to login
       return false;
     }

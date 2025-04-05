@@ -54,16 +54,18 @@ h1 {
   display: flex;
   justify-content:flex-start;
   align-items: flex-start;
+  flex-direction: row-reverse;
   gap: 10px;
   width: 100%;
   height: auto;
 }
 .tracking-map{
- width: 50%;
-  background: url('../../../../assets/img/abd.png') no-repeat center center;
+  width: 50%;
   background-size: cover;
   min-height: 550px;
   border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 .live-tracking-content{
   width: 50%;

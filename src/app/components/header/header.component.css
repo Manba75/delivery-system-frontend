@@ -16,6 +16,11 @@
   margin-bottom: -60px;
 
 }
+:host {
+  display: block !important;
+  z-index: 9999 !important;
+  position: relative !important;
+}
 
 /* .header-container {
   display: flex;
@@ -25,6 +30,8 @@
   font-size: 15px;
   font-weight: 500;
 } */
+
+
 
 .header-container {
   display: flex;
@@ -287,13 +294,15 @@ width: 80%;
   background: white;
   border: 2px solid var(--primary-color);
   border-radius: 20px;
-  padding: 5px 15px;
+  padding: 5px 10px;
   color: var(--primary-color);
-  font-size: 16px;
+  font-size: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   cursor: pointer;
+   white-space: nowrap;
+  word-wrap: nowrap;
 }
 
 /* Ensure Proper Positioning of Profile Dropdown */
@@ -368,9 +377,10 @@ width: 80%;
 
 /* Responsive Design */
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
    .header {
-  width: 60%;
+  width: 80%;
+
   }
 
   .header-container{
@@ -409,6 +419,7 @@ width: 80%;
     flex-direction: row-reverse;
     gap: 10px;
   }
+
 }
 
 @media (max-width:1024px) {
@@ -627,3 +638,117 @@ width: 80%;
 
 }
 
+
+/* Available Button Styles */
+/* Switch Button Container */
+.switch-button {
+  width: 110px;
+  height: 30px;
+  border-radius: 20px;
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Default State: Unavailable */
+.switch-button-checkbox {
+  display: none; /* Hide default checkbox */
+}
+
+/* Label inside button */
+.switch-button-label {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  background: #d9534f; /* Red for Unavailable */
+  color: white;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Toggle Circle */
+.switch-button-label::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* When Checked (Available) */
+.switch-button-checkbox:checked + .switch-button-label {
+  background: #5cb85c; /* Green for Available */
+}
+
+.switch-button-checkbox:checked + .switch-button-label::after {
+  transform: translateX(85px);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  margin-right: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 26px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #28a745;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.text-success {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-weight: 600;
+}

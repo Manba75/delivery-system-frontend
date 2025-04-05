@@ -7,39 +7,13 @@
       <h1>Choose Your City</h1>
     </div>
 
-    <div class="container">
-        <div class="city-card">
-            <img src="../../../../assets/img/abd.png" alt="Ahmedabad">
-            <p>Ahmedabad</p>
+    <app-loader [isLoading]="loading"></app-loader>
+    <div class="container"  >
+        <div class="city-card" *ngFor="let city of cities"  (click)="selectcity(city)" [class.active]="city === selectedcity" >
+            <img [src]="city.city_img" alt="city.city_name">
+            <p>{{city.city_name}}</p>
         </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/rajkot.png" alt="Bangalore">
-            <p>Bangalore</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/abd.png" alt="Hyderabad">
-            <p>Hyderabad</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/rajkot.png" alt="Jaipur">
-            <p>Jaipur</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/abd.png" alt="Mumbai">
-            <p>Mumbai</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/rajkot.png" alt="Vadodara">
-            <p>Vadodara</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/abd.png" alt="Kolkata">
-            <p>Kolkata</p>
-        </div>
-        <div class="city-card">
-            <img src="../../../../assets/img/rajkot.png" alt="Rajkot">
-            <p>Rajkot</p>
-        </div>
+
     </div>
   </div>
 </div>

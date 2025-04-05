@@ -6,42 +6,55 @@
     <div class="vehicletype-section-header">
       <h1>Choose Your Vehicle </h1>
       </div>
+      <app-notification></app-notification>
+      <form>
+
       <div class="container">
+
+        <app-loader [isLoading]="loading"></app-loader>
+
         <div class="dropdown">
-        <select id="city" onchange="openCityPage()">
-         <option selected disabled>Select a city</option>
-                <option value="city-selection.html">Ahmedabad</option>
-                <option value="city-selection.html">Bangalore</option>
-                <option value="city-selection.html">Hyderabad</option>
-                <option value="city-selection.html">Jaipur</option>
-                <option value="city-selection.html">Mumbai</option>
-                <option value="city-selection.html">Vadodara</option>
-                <option value="city-selection.html">Kolkata</option>
-                <option value="city-selection.html">Rajkot</option>
-            </select>
+
+        <select id="city" (click)="onCityChange($event)">
+         <option selected [value]="currentcity">{{currentcity}}</option>
+         </select>
         </div>
 
-        <div class="transport-options">
-            <div class="option" onclick="selectTransport('Two Wheelers')">
-                <img src="../../../../assets/img/truck.png" alt="Two Wheelers">
-                <p>Two Wheelers</p>
+        <div class="transport-options" >
+            <div class="option"  *ngFor="let vehicletype of vehicletypes"  [class.active]="vehicletype === selectedvehicletype" (click)="selectTransport(vehicletype)"   >
+               <div class="option-img">
+                <img [src]="vehicletype.vehicletype_img" alt="Two Wheelers">
+                </div>
+                <p>{{vehicletype.vehicletype_type}}</p>
             </div>
-            <div class="option" onclick="selectTransport('Trucks')">
-                <img src="../../../../assets/img/bike.png" alt="Trucks">
-                <p>Trucks</p>
+          <button class="estimate-btn" type="submit" (click)=" getestimate()"> Get an estimate →</button>
+        </div>
+
+      </div>
+    </form>
+
+      <div class="vehicle-details"  *ngIf="selectedvehicletype">
+          <div class="conatiner1">
+            <div class="vehicle-img">
+              <img [src]="selectedvehicletype.vehicletype_img" alt="Two Wheeler">
             </div>
-            <div class="option" onclick="selectTransport('Trucks')">
-              <img src="../../../../assets/img/truck.png" alt="Trucks">
-              <p>Trucks</p>
+            <div class="vehicle-info">
+              <div class="vehicle-type">
+                <h5>{{selectedvehicletype.vehicletype_type}}</h5>
+              </div>
+               <div class="vehicle-basic">
+                <div class="vehicle-price">
+                  <p>Price : <span>{{selectedvehicletype.vehicletype_price}}</span></p>
+                </div>
+                <div class="vehicle-weight">
+                  <p>Parcel Weight <span>{{selectedvehicletype.vehicletype_max_weight}}</span></p>
+                </div>
+               </div>
+              <div class="vehicle-description">
+                <p>Fast and reliable delivery for small parcels within the city.</p>
+              </div>
+            </div>
           </div>
-          <div class="option" onclick="selectTransport('Trucks')">
-            <img src="../../../../assets/img/bike.png" alt="Trucks">
-            <p>Trucks</p>
-        </div>
-
-          <button class="estimate-btn">Get an estimate →</button>
-
-        </div>
       </div>
   </div>
 </div>

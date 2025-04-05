@@ -61,15 +61,16 @@ export class VerifyOTPComponent implements OnInit {
 
       next:(response)=>{
 
-        if( response && response.status_code=='1'){
-          this.notification.showMessage(response.status_message,"success");
-          let token = response.data.token;
-          console.log("t",token)
+        if( response && response.status_code==='1'){
 
-          localStorage.setItem('authToken', token);
-          this.cookieservice.set('authToken', token, 7, '/');
+          localStorage.setItem("token", response.data.token);
+          this.cookieservice.set("token", response.data.token, { path: "/", secure: true, sameSite: "Lax" });
+          this.notification.showMessage(response.status_message,"success")
+
+
           setTimeout(() => {
             this.router.navigate([`${this.userType}/login`]);
+            // this.loading = false;
           }, 1000);
 
         }else{

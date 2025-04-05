@@ -68,7 +68,7 @@ h1 {
 }
 .address-map{
   flex: 1;
-  background: url('../../../../assets/img/abd.png') no-repeat center center;
+  /* background: url('../../../../assets/img/abd.png') no-repeat center center; */
   background-size: cover;
   min-height: 500px;
 }
@@ -164,3 +164,27 @@ h1 {
   }
 }
 
+#map {
+  height: 500px;
+  width: 100%;
+}
+.input-container {
+  position: relative;
+}
+.input-container ul {
+  position: absolute;
+  background: white;
+  list-style: none;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+}
+.input-container ul li {
+  padding: 5px;
+  cursor: pointer;
+}
+.input-container ul li:hover {
+  background: #f0f0f0;
+}

@@ -18,7 +18,7 @@ export class VehicletypeService {
   private baseurl = environment.apibaseURL;
 
   constructor(private http: HttpClient) { }
-getvehicletypes(): Observable<AuthResponse> {
+  getvehicletypes(): Observable<AuthResponse> {
     return this.http.get<AuthResponse>(`${this.baseurl}vehicletype/vehicletypes`);
   }
 

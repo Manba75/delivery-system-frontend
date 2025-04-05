@@ -31,6 +31,15 @@
             <small class="text-danger" *ngIf="(submitted || verifyemailform.get('email')?.touched) && verifyemailform.get('email')?.errors?.['email']">
               Email is invalid
             </small>
+            <small class="text-danger" *ngIf="(submitted || verifyemailform.get('email')?.touched) && verifyemailform.get('email')?.errors?.['pattern']">
+              Email is invalid
+            </small>
+            <small class="text-danger" *ngIf="(submitted || verifyemailform.get('email')?.touched) && verifyemailform.get('email')?.errors?.['minlength']">
+              Email minimum length is 10 characters
+            </small>
+            <small class="text-danger" *ngIf="(submitted || verifyemailform.get('email')?.touched) && verifyemailform.get('email')?.errors?.['maxlength']">
+              Email maximum length is 20 characters
+            </small>
           </div>
          <!-- <a [routerLink]="['reset-password', userType]" > -->
           <button type="submit" class="btn login-btn" >verify</button>

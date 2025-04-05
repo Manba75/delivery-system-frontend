@@ -94,7 +94,7 @@ export class VerifyemailComponent implements OnInit {
 
               this.notification.showMessage(response.status_message || "Email is already registered. Please login!", "success");
               setTimeout(() => {
-                this.router.navigate([this.userType === 'customer' ? 'customer/login' : 'dpartner/login']);
+                this.router.navigate([this.userType === 'customer' ? '/customer/login' : '/dpartner/login'], { queryParams: { email: userData.email } });
               }, 1000);
               return;
             }
@@ -102,7 +102,7 @@ export class VerifyemailComponent implements OnInit {
             // If user is not found, redirect to signup
             this.notification.showMessage(response.status_message || "User not found. Please sign up!", "error");
             setTimeout(() => {
-              this.router.navigate([this.userType === 'customer' ? 'customer/signup' : 'dpartner/signup']);
+              this.router.navigate([this.userType === 'customer' ? '/customer/signup' : '/dpartner/signup']);
             }, 1000);
           },
           error: (error) => {

@@ -54,18 +54,14 @@ export class ForgotpasswordComponent implements OnInit {
         if (res && res.status_code == '1') {
           console.log("res",res);
           this.notification.showMessage(res.status_message, 'success');
-
-          // setTimeout(() => {
-          //   this.router.navigate(['userType/reset-password'], { queryParams: { token:res.data.resetToken , email: userdata.email} });
-          // }, 2000);
         } else {
           this.notification.showMessage(res.status_message, 'error');
         }
       },
-      // error: (err: any) => {
-      //   this.notification.showMessage('Something went wrong', 'error');
-      //   console.error(err);
-      // },
+      error: (err: any) => {
+        this.notification.showMessage('Something went wrong', 'error');
+        console.error(err);
+      },
       complete: () => {
         this.loading = false;
       }

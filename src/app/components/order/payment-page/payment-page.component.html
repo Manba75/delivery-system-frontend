@@ -9,19 +9,25 @@
       </div>
       <div class="container">
         <div class="payment">
+          <app-notification></app-notification>
            <div class="payment-header">
-             <h1>Payment</h1>
+             <h1>Placing order </h1>
              </div>
         <div class="payment-body">
              <div class="payment-img">
+              <app-loader [isLoading] ="loading"></app-loader>
                   <!-- <img src="../../../assets/img/contact.png" alt=""> -->
              </div>
              <div class="payament-content">
-               <h5>Payment Method :CASH ON DElivery</h5>
+               <h5>Order Details</h5>
                <div class="payment-details">
-                <p>Total Charge : 100</p>
+                <p>City :{{orderdetails.city}}</p>
+                <p>Vehicletype :{{orderdetails.vehicletype}}</p>
+                <p>Pickup : {{orderdetails.pickup.fullAddress}}</p>
+                <p>Drop :{{orderdetails.drop.fullAddress}}</p>
+                <p>Payment Cash on delivery  {{orderdetails.charge}}</p>
                </div>
-               <button class="btn login-btn">continue</button>
+               <button class="btn login-btn" (click)="orderplace()">confirm</button>
              </div>
         </div>
         </div>
