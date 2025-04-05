@@ -67,7 +67,7 @@ export class DeliverypartnersignupComponent implements OnInit {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
-  // licence number validators
+
 
   dpartnersignup() {
 
@@ -75,20 +75,13 @@ export class DeliverypartnersignupComponent implements OnInit {
     this.isSubmitted = true;
     if(this.dpartnersignupform.invalid) {
       this.dpartnersignupform.markAllAsTouched()
-      console.log("invalid")
       return;
     }
-    console.log("mmm");
+
     this.loading = true;
     let userData = this.dpartnersignupform.value;
-    console.log("u",userData);
-    console.log("hh");
     this.authservice.dpartnerSignup(userData).subscribe({
       next: (response) => {
-        console.log(response);
-        // let email=response.data.user.user.dpartner_email;
-
-        // console.log("email",email);
         if(response && response.status_code === "1") {
           this.notification.showMessage(response.status_message,"success");
           this.router.navigate(['/dpartner/verify-otp'], {queryParams: {email:userData.dpartner_email}});
