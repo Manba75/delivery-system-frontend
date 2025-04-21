@@ -74,28 +74,8 @@ export class CustomerdashboardComponent implements OnInit  {
     });
   }
 
-  // acceptOrder(order: any) {
-  //   this.orderservice.acceptOrder({ orderId: order.id }).subscribe({
-  //     next: (response: any) => {
-  //       if (response && response.status_code === '1') {
-  //         console.log(" Order Accepted:", response);
-  //         this.notification.showMessage("Order accepted successfully!", 'success');
-  //         this.loading = false;
-
-  //         order.order_status = 'accepted';
-  //         this.websocketservice.orderAccepted(order);
-  //         this.listenForStatusUpdates();
-  //         this.sortOrders();
-  //       }
-  //     },
-  //     error: () => console.error("Failed to accept order")
-  //   });
-  // }
-
 
   listenForStatusUpdates() {
-
-
     this.websocketservice.listenOrderStatusUpdate().subscribe((data: any) => {
       this.orders = this.orders.map(order => {
         if (order.id === data.orderdata.id) {
@@ -103,8 +83,6 @@ export class CustomerdashboardComponent implements OnInit  {
         }
         return order;
       });
-
-
       this.sortOrders();
     });
   }
@@ -114,9 +92,6 @@ export class CustomerdashboardComponent implements OnInit  {
     this.orders.sort((a, b) => {
       if (a.order_status === 'accepted' && b.order_status !== 'accepted') return -1;
       if (a.order_status !== 'accepted' && b.order_status === 'accepted') return 1;
-
-
-
       return 0;
     });
 

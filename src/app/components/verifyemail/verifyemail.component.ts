@@ -54,14 +54,13 @@ export class VerifyemailComponent implements OnInit {
         : this.authservice.verifyDpartnerEmail(userData);
         verifyApi.subscribe({
           next: (response) => {
-            console.log("Full API Response:", response); // Debugging
 
             if (response?.status_code === "1") {
               let user = response?.data;
 
-              // If user exists but is NOT verified, resend OTP and redirect
+              
               if (user?.cust_isverify === false) {
-                console.log("User not verified. Resending OTP..."); // Debugging
+               
 
                 this.authservice.customerResendOtp({ email: userData.email }).subscribe({
                   next: (res) => {
@@ -75,7 +74,6 @@ export class VerifyemailComponent implements OnInit {
                 return;
               }
               if (user?.dpartner_isverify === false) {
-                console.log("User not verified. Resending OTP..."); // Debugging
 
                 this.authservice.dpartnerResendOtp({ email: userData.email }).subscribe({
                   next: () => {
@@ -98,8 +96,6 @@ export class VerifyemailComponent implements OnInit {
               }, 1000);
               return;
             }
-
-            // If user is not found, redirect to signup
             this.notification.showMessage(response.status_message || "User not found. Please sign up!", "error");
             setTimeout(() => {
               this.router.navigate([this.userType === 'customer' ? '/customer/signup' : '/dpartner/signup']);

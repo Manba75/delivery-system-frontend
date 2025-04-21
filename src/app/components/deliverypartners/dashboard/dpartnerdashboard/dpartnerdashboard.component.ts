@@ -15,12 +15,6 @@ enum OrderStatus {
   Rejected = 'rejected'
 }
 
-// interface Order {
-//   id: number;
-//   status: string;
-//   order_status: string;
-// }
-
 @Component({
   selector: 'app-dpartnerdashboard',
   templateUrl: './dpartnerdashboard.component.html',
@@ -47,10 +41,7 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
     private authservice: AuthService,
-  ) {
-    console.log("DpartnerdashboardComponent initialized");
-
-  }
+  ) {}
 
   ngOnInit(): void {
 
@@ -61,16 +52,10 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
     } else {
       console.error("Delivery Partner ID is null. Cannot log in.");
     }
-    // if(!this.isavailable){
-      this.listenForNewOrders();
-    // }
-   
-
+    this.listenForNewOrders();
     setInterval(() => {
       this.fetchOrders();
     }, 10000);
-
-
     this.selectedFilter.valueChanges.subscribe((value:any) => {
       this.filterOrders(value);
     });
@@ -123,8 +108,6 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
             });
 
           this.calculatePagination();
-
-          // console.log("Orders after processing:", this.orders);
           this.cdr.detectChanges();
         }
       },
@@ -141,8 +124,6 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
       if (!order || !order.data || !order.insertResult) return;
 
       const newOrderId: number = order.insertResult;
-      console.log("New Order ID:", newOrderId);
-
       if (this.orders.some((o: any) => o.id === newOrderId)) return;
 
       this.ngZone.run(() => {
@@ -182,8 +163,6 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
           this.calculatePagination();
           this.loading = false;
           this.notification?.showMessage('New Order Received!', 'success');
-
-
           this.cdr.detectChanges();
         });
 
@@ -208,11 +187,8 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
               order.order_status = OrderStatus.Accepted;
               this.notification.showMessage(`Order Accepted! OTP Sent: ${response.data.otp}`, 'success');
   
-              // Notify other partners
-  
               this.websocketservice.orderAccepted({ id: order.id, cust_id:order.cust_id,dpartnerId: this.deliveryPartnerId, order_status: OrderStatus.Accepted });
-  
-              this.cdr.detectChanges();
+             this.cdr.detectChanges();
             });
           } else {
             this.notification?.showMessage(response.message, 'error');
@@ -238,7 +214,6 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
             this.notification.showMessage(` Order status updated to ${newStatus}!`, 'success');
             this.loading = false;
             this.websocketservice.updateOrderStatus({ id: order.id, cust_id:order.cust_id, order_status: newStatus });
-            // this.websocketservice.listenOrderStatusUpdate();
             this.cdr.detectChanges();
           });
         } else {
@@ -256,18 +231,10 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
     this.orderservice.orderStatusUpdate({ order_id, newstatus }).subscribe({
       next: (response: any) => {
         if (response.status_code === '1') {
-          console.log("Order rejected:", response);
-  
-          // Update order status
+
           order.order_status = 'rejected';
-  
-          // Notify backend via WebSocket
           this.websocketservice.updateOrderStatus({ orderId: order.id, order_status: newstatus });
-  
-          // Remove the order from the list
           this.orders = this.orders.filter(o => o.id !== order.id);
-  
-          // Optional: sort again if needed
           this.sortOrders();
         }
       },
@@ -289,7 +256,7 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
       case OrderStatus.Accepted: return 'pickup';
       case OrderStatus.Pickup: return 'In-Progress';
       case OrderStatus.InProgress: return 'Delivered';
-      case OrderStatus.InProgress: return 'rejected';
+      case OrderStatus.Rejected: return 'rejected';
       default: return '';
     }
   }
@@ -420,7 +387,7 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
 
     }
 
-    fetchCustomerName(custId: number) {
+fetchCustomerName(custId: number) {
       this.authservice.getCustomerById().subscribe({
         next: (response) => {
           if (response && response.status_code === '1') {
@@ -436,9 +403,6 @@ export class DpartnerdashboardComponent implements OnInit, OnDestroy {
           return 'Unknown Customer';
         }
       })
-     }
-
-
-
+ }
 }
 

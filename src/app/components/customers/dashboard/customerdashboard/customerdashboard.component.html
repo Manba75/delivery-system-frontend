@@ -23,7 +23,7 @@
 
       <app-loader [isLoading]="loading"></app-loader>
 
-      <table *ngIf="paginatedOrders.length > 0">
+      <table class="table">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of paginatedOrders">
+          <tr *ngFor="let order of paginatedOrders"  >
             <td>{{ order.id }}</td>
             <td>{{ order.cust_name }}</td>
             <td>{{ order.order_date | date }}</td>
@@ -49,12 +49,13 @@
             </td>
             <td>{{ order.dpartner_phone }}</td>
           </tr>
+           <tr *ngIf="paginatedOrders.length == 0">
+            <td colspan="7" class="no-data">No orders found</td>
+          </tr>
         </tbody>
       </table>
 
-      <div *ngIf="paginatedOrders.length === 0 && !loading" class="no-results">
-        No orders found.
-      </div>
+     
 
       <div class="pagination" *ngIf="totalPages > 1">
         <button class="btn" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>

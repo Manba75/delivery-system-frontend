@@ -12,7 +12,6 @@ export class AppComponent implements OnInit ,AfterViewInit {
   title = 'frontend';
   @ViewChild (NotificationComponent) notification!: NotificationComponent;
 
-  // uset
 
   constructor(private websocketservice :WebsocketserviceService){}
 

@@ -17,7 +17,7 @@ export class NotificationComponent {
 
     setTimeout(() => {
       this.visible = false;
-    }, 4000); // Hide after 4 seconds
+    }, 10000); 
   }
 }
 

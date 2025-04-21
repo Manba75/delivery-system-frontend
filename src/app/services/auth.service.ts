@@ -34,7 +34,6 @@ export class AuthService {
 
   //customer verify otp
   customerverifyOtp(userdata: any): Observable<AuthResponse> {
-
     return this.http.post<AuthResponse>(`${this.baseurl}customer/verify-otp`, userdata);
   }
 
@@ -55,16 +54,15 @@ export class AuthService {
 
   // customer resetpassword
   customerResetPassword(userdata: any): Observable<AuthResponse> {
-    console.log("url",`${this.baseurl}customer/reset-password`)
-
     return this.http.post<AuthResponse>(`${this.baseurl}customer/reset-password`, userdata);
   }
 
+ // customer get profile
   getUserDetails(): Observable<AuthResponse> {
-
       return this.http.get<AuthResponse>(`${this.baseurl}customer/get-profile`,{withCredentials:true});
-
   }
+
+  //customer update profile
   updateUserprofile(userdata:any):Observable<AuthResponse>{
     return this.http.put<AuthResponse>(`${this.baseurl}customer/update-profile`,userdata,{withCredentials:true});
   }
@@ -75,8 +73,9 @@ export class AuthService {
   }
 
 
-  /********************************************* */
-  //delivery partner signup
+/********************************************* Delivery Partners API ************************************/
+  
+//delivery partner signup
   dpartnerSignup(userdata:any):Observable<AuthResponse>{
     console.log("userdata",userdata)
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/signup`,userdata);
@@ -86,6 +85,7 @@ export class AuthService {
   dpartnerverifyOtp(userdata: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/verify-otp`, userdata);
   }
+
   //delivery partner verify email
   verifyDpartnerEmail(userdata: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/check-email`, userdata);
@@ -96,6 +96,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/resend-otp`, userdata
     );
   }
+
   //delivery partner login
   dpartnerLogin(userdata: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/login`, userdata,{withCredentials:true});
@@ -106,14 +107,14 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/forgot-password`, userdata);
   }
 
-  //  // customer resetpassword
+ 
 //dpartner resetpassword
   dpartnerResetPassword(userdata: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseurl}dpartner/reset-password`, userdata);
   }
 
 
-  // dpartner get profile
+ // dpartner get profile
   getDpartnerDetails(): Observable<AuthResponse> {
     return this.http.get<AuthResponse>(`${this.baseurl}dpartner/get-profile`,{withCredentials:true});
   }
@@ -134,10 +135,7 @@ export class AuthService {
     return this.http.get<AuthResponse>(`${this.baseurl}dpartner/get-available-dpartner`,{withCredentials:true});
   }
 
-
-
   //isloggedin
-
   isLoggedIn(): boolean {
     const userType = localStorage.getItem('userType');
     const tokenKey = userType ? `${userType}_token` : null;
@@ -156,7 +154,6 @@ export class AuthService {
         this.logout();
         return false;
       }
-
       return true;
     } catch (error) {
       console.error("Invalid token format:", error);
@@ -165,6 +162,7 @@ export class AuthService {
     }
   }
 
+  //logout
   logout() {
     const userType = localStorage.getItem('userType');
     if (userType) {

@@ -54,9 +54,7 @@ export class WebsocketserviceService {
       });
 
       // Listen for order status update event
-
       this.socket.on("update_order_status", (data: any) => {
-        console.log(" Order Status Update Received:", data);
         this.orderStatusSubject.next(data);
       });
 
@@ -65,7 +63,7 @@ export class WebsocketserviceService {
       });
 
       this.socket.on('disconnect', () => {
-        console.warn('⚠ WebSocket Disconnected! Retrying...');
+        console.warn('WebSocket Disconnected! Retrying...');
         setTimeout(() => {
           this.connect();
         }, 1000);
@@ -157,7 +155,7 @@ export class WebsocketserviceService {
       }
     }
   }
-    // Listen for general notifications
+    /** Listen for general notifications */ 
     onNewNotification(): Observable<any> {
       return new Observable((observer) => {
         this.socket.on('new_notification', (notification) => {

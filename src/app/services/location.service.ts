@@ -14,7 +14,7 @@ export class LocationService {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            console.log(" Latitude:", position.coords.latitude, "Longitude:", position.coords.longitude);
+          
             resolve({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
@@ -48,11 +48,11 @@ export class LocationService {
           error: false,
           message: "Address found",
           data: {
-            flatno: addressData.house_number || "N/A",  // Use "N/A" if house number is missing
-            street: addressData.road ||  addressData.county ||"N/A",
-            landmark: addressData.neighbourhood || addressData.suburb || addressData.village || "N/A",
+            flatno: addressData.house_number || addressData.county || addressData.footway || addressData.path || addressData.pedestrian || addressData.lane || addressData.highway || addressData.amenity || "near by",  // Use "N/A" if house number is missing
+            street: addressData.road ||  addressData.county || addressData.footway || addressData.path || addressData.pedestrian || addressData.lane || addressData.highway || addressData.amenity ||"",
+            landmark: addressData.neighbourhood || addressData.suburb || addressData.village || addressData.footway || addressData.path || addressData.pedestrian || addressData.lane || addressData.highway || addressData.amenity ||addressData.town ||  "",
             city: addressData.city || addressData.town || addressData.state_district || "Unknown",
-            state: addressData.state || "N/A",
+            state: addressData.state || "",
             pincode: String(addressData.postcode || "000000"),
             latitude: String(latitude),
             longitude: String(longitude),
@@ -63,12 +63,14 @@ export class LocationService {
     );
   }
 
+  /** Convert address to latitude & longitude using OpenStreetMap */
   getCoordinates(address: string): Observable<any> {
     if (!address) return new Observable();
 
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
     return this.http.get(url);
   }
+  
   getLatLngFromAddress(address: string): Observable<{ lat: number; lng: number } | { error: boolean }> {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
 

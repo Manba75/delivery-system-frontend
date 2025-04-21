@@ -32,15 +32,7 @@ export class SignupComponent implements OnInit {
     this.customersignup = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email, Validators.minLength(10), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}$'), this.lowercaseValidator]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(15),
-            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]+$')
-          ]
-        ],
+        password: ['',[ Validators.required,Validators.minLength(8),Validators.maxLength(15),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]+$')]],
         confirmpassword: ['', Validators.required]
       },
       { validators: matchPassword }
@@ -77,11 +69,6 @@ export class SignupComponent implements OnInit {
 
       next: (response) => {
         if (response && response.status_code === "1") {
-          // let token = response.data.token;
-          // console.log("t",token)
-
-          // localStorage.setItem('authToken', token);
-          // this.cookieService.set('authToken', token, 7, '/');
 
           this.notification.showMessage(response.status_message || "Signup successful!", "success");
           this.customersignup.reset();

@@ -92,19 +92,16 @@ export class LoginComponent implements OnInit {
           verifyApi.subscribe({
             next: (response) => {
               if (response && response.status_code === "1") {
-                // Store token dynamically based on userType
                 localStorage.setItem('userType', this.userType);
 
                 const tokenKey = `${this.userType}_token`;
                 localStorage.setItem(tokenKey, response.data.token);
                 this.cookieservice.set(tokenKey, response.data.token, { path: "/", secure: true, sameSite: "Lax" });
 
-                // Store user details
+               
                 let user = this.userType === 'customer' ? response.data.user : response.data.dpartner;
                 console.log("User:", user);
                 localStorage.setItem('user', JSON.stringify(user));
-
-                // WebSocket connection based on user type
 
                 if (this.userType === 'customer' && user.id) {
 

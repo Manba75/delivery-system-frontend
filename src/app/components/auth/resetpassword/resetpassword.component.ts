@@ -27,35 +27,20 @@ export class ResetpasswordComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Get userType from route params
     this.route.paramMap.subscribe((params) => {
       this.userType = params.get('userType') || 'customer';
     });
-
-    // Get token and email from query params
     this.route.queryParams.subscribe(params => {
       this.token = params['token'] ? decodeURIComponent(params['token']) : '';  // Decode token
       this.email = params['email'] ? decodeURIComponent(params['email']) : '';
-
-      console.log("Extracted Token:", this.token);
-      console.log("Extracted Email:", this.email);
 
       if (!this.token || !this.email) {
         this.notification?.showMessage("Invalid or missing token/email", 'error');
       }
     });
 
-    // Initialize form with validation
     this.resetpasswordform = this.fb.group({
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(15),
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]+$')
-        ]
-      ],
+      password: ['',  [ Validators.required,Validators.minLength(8), Validators.maxLength(15), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]+$')]],
       confirmpassword: ['', Validators.required]
     }, { validators: matchPassword });
   }
@@ -115,7 +100,7 @@ export class ResetpasswordComponent implements OnInit {
   }
 }
 
-// ✅ Function to Validate Matching Passwords
+// Function to Validate Matching Passwords
 function matchPassword(group: AbstractControl): ValidationErrors | null {
   let password = group.get('password')?.value;
   let confirmPassword = group.get('confirmpassword')?.value;

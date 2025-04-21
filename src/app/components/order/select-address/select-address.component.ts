@@ -39,9 +39,9 @@ export class SelectAddressComponent implements OnInit {
   ngOnInit() {
     this.addressForm = this.fb.group({
       pickupAddress: ['', Validators.required],
-      pickupPhone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      pickupPhone: ['', [Validators.required, Validators.pattern('^[6-9][0-9]{9}$')]],
       dropAddress: ['', Validators.required],
-      dropPhone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
+      dropPhone: ['', [Validators.required, Validators.pattern('^[6-9][0-9]{9}$')]]
     });
 
     this.shareService.orderData$.subscribe(orderData => {
@@ -83,7 +83,7 @@ export class SelectAddressComponent implements OnInit {
     this.pickupMarker = L.marker([this.center.lat, this.center.lng], { draggable: true }).addTo(this.map)
       .bindPopup("Pickup Location").openPopup();
 
-    this.dropMarker = L.marker([this.center.lat + 0.01, this.center.lng], { draggable: true }).addTo(this.map)
+    this.dropMarker = L.marker([this.center.lat , this.center.lng], { draggable: true }).addTo(this.map)
       .bindPopup("Drop Location").openPopup();
 
     this.pickupMarker.on('dragend', (event: any) => this.updatePickupLocation(event.target.getLatLng()));
@@ -114,7 +114,7 @@ export class SelectAddressComponent implements OnInit {
     this.locationService.getFullAddress(position.lat, position.lng).subscribe(data => {
       if (data.error) return;
       if (data.data.city !== this.selectedCity) {
-        alert(`Pickup must be within ${this.selectedCity}.`);
+        alert(`Pickup must be within ${this.selectedCity} city.`);
         return;
       }
 

@@ -121,8 +121,6 @@ import { AgmCoreModule } from '@agm/core';
     OrderhistroryComponent,
     LoaderComponent,
     NotificationComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -133,14 +131,12 @@ import { AgmCoreModule } from '@agm/core';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center',
-      timeOut: 1000,
+      timeOut: 5000,
       progressBar: true,
       closeButton: true,
       preventDuplicates: true,
       newestOnTop: true
     }),
-
-
   ],
   exports: [
     SignupComponent,
@@ -163,9 +159,6 @@ import { AgmCoreModule } from '@agm/core';
     AboutComponent,
     ContactComponent,
     HeaderComponent,
-
-
-
   ],
   providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

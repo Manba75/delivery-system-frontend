@@ -11,10 +11,10 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
-      return true; // Allow access
+      return true; 
     } else {
-      this.userTpe = localStorage.getItem('userType') || ''; // Get user type from local storage
-      this.router.navigate([`${this.userTpe}/login`]); // Redirect to login
+      this.userTpe = localStorage.getItem('userType') || ''; 
+      this.router.navigate([`${this.userTpe}/login`]); 
       return false;
     }
   }

@@ -37,7 +37,6 @@ export class DpartnerprofileComponent implements OnInit {
       next: (response) => {
         if (response && response.status_code === "1") {
           this.cities = response.data;
-          console.log("Cities:", this.cities);
         }
       },
       error: (error) => {
@@ -48,8 +47,6 @@ export class DpartnerprofileComponent implements OnInit {
       next: (response) => {
         if (response && response.status_code === "1") {
           this.vehicletypes = response.data;
-          // console.log("v",response)
-          console.log("Vehicletypes:", this.vehicletypes);
         }
       },
       error: (error) => {
@@ -67,7 +64,7 @@ export class DpartnerprofileComponent implements OnInit {
         this.loading=true;
         if(response && response.status_code=='1'){
           console.log(response);
-          this.notification.showMessage(response.status_message,'success');
+          // this.notification.showMessage(response.status_message,'success');
           this.dpartnerdata=response.data;
           this.dpartnerprofileform.patchValue(this.dpartnerdata);
         }else{
@@ -95,7 +92,7 @@ export class DpartnerprofileComponent implements OnInit {
     this.authservice.updateDpartnerProfile(userData).subscribe({
       next:(response)=>{
         if(response && response.status_code=='1'){
-          this.notification.showMessage(response.status_message,'success');
+          this.notification.showMessage("profile updated successfully",'success');
           this.getProfile();
         }else{
           this.notification.showMessage(response.status_message,'error');

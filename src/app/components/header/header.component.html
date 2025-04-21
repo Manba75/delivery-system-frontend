@@ -50,7 +50,7 @@
               </div>
             </div>
           </li>
-          <li *ngIf="userType === 'customer' && isUserLoggedIn">
+          <li *ngIf="!isUserLoggedIn || (userType === 'customer' && isUserLoggedIn)">
             <a routerLink="/order/select-vehicletype">
               <button class="btn">Book a delivery</button>
             </a>

@@ -27,7 +27,7 @@ import { DpartnerdashboardComponent } from './components/deliverypartners/dashbo
 import { DpartnerdashboardpageComponent } from './pages/deliverypartners/dpartnerdashboardpage/dpartnerdashboardpage.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthGuard } from './services/auth.guard';
-// import { AgmCoreModule } from '@agm/core';
+
 
 const routes: Routes = [
   {path: '',component: HomeComponent },
@@ -43,7 +43,6 @@ const routes: Routes = [
   {path:':userType/reset-password-success',component:ResetpasswordsuccesspageComponent},
 
   //customer
-
   {path:'customer/dashboard',component:CustomerdashboardpageComponent, canActivate: [AuthGuard]},
   {path:'customer/profile',component:CustomerprofilepageComponent, canActivate: [AuthGuard]},
 
@@ -59,16 +58,12 @@ const routes: Routes = [
   {path:'order/live-tracking/:id',component:LiveTrackingpageComponent},
   {path:'order/payment',component:PaymentPageComponent},
   {path:'order/confirm-order',component:ConfirmOrderPageComponent},
-
-
   {path: '**',component:ErrorPageComponent},
-
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),
-   ],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

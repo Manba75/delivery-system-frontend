@@ -22,7 +22,7 @@ export class CustomerprofileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authservice: AuthService,
-    private locationService: LocationService // ✅ Inject LocationService
+    private locationService: LocationService 
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +38,6 @@ export class CustomerprofileComponent implements OnInit {
     });
 
     this.getuserdetails();
-
-    // ✅ Auto-fetch coordinates when the address changes
     this.profileForm.valueChanges.pipe(debounceTime(1000)).subscribe(() => this.fetchCoordinates());
     this.getuserdetails();
   }
@@ -59,18 +57,15 @@ export class CustomerprofileComponent implements OnInit {
 
   fetchCoordinates() {
     const address = `${this.profileForm.get('landmark')?.value}, ${this.profileForm.get('street')?.value}, ${this.profileForm.get('flatno')?.value}, ${this.profileForm.get('city_name')?.value}, ${this.profileForm.get('pincode')?.value}`;
-    console.log("Formatted Address for API:", address);
 
     if (!address.trim()) return;
 
     this.locationService.getCoordinates(address).subscribe({
       next: (data) => {
-        console.log("Location res",data)
         if (data.length > 0) {
           const location = data[0];
           this.latitude = location.lat;
           this.longitude = location.lon;
-          console.log(`Updated Latitude: ${this.latitude}, Longitude: ${this.longitude}`);
         } else {
           console.warn('Invalid address or not found.');
         }
@@ -96,7 +91,7 @@ export class CustomerprofileComponent implements OnInit {
     this.authservice.updateUserprofile(updatedData).subscribe({
       next: (response) => {
         this.loading = true;
-        console.log("response", response);
+        
 
         if (response && response.status_code === '1') {
           this.notification.showMessage(response.status_message, 'success');
