@@ -92,9 +92,8 @@
 
             <tr *ngFor=" let order of  paginatedOrders ">
               <td>{{ order.id}}</td>
-
-              <td>{{ order.order_date | date }}</td>
               <td>{{ order.cust_name }}</td>
+              <td>{{ order.order_date | date }}</td>
               <td>{{ order.pickup_address }}</td>
               <td>{{ order.drop_address }}</td>
               <td>{{ order.order_delivery_charge |  currency:'INR' }}</td>
